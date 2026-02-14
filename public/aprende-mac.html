@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AprendeMac — Tu Guía Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFBF5;--card:#FFF;--pri:#1B6B4A;--pri-l:#D4EDDA;--pri-ll:#EEF7F1;--pri-d:#0D3B28;--acc:#D4572A;--acc-l:#FCE4DA;--blu:#2563EB;--blu-l:#DBEAFE;--pur:#7C3AED;--pur-l:#EDE9FE;--txt:#1A1A2E;--txt-l:#5A6178;--txt-m:#9CA3AF;--ok:#059669;--ok-l:#D1FAE5;--warn:#D97706;--warn-l:#FEF3C7;--err:#DC2626;--err-l:#FEE2E2;--brd:#E5E7EB;--sh:0 4px 20px rgba(0,0,0,.06);--r:20px;--rs:12px;--rx:8px;--t:.25s cubic-bezier(.4,0,.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);font-size:21px;line-height:1.75;min-height:100vh;-webkit-font-smoothing:antialiased}
+.top-bar{position:sticky;top:0;z-index:1000;background:rgba(255,251,245,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--brd);padding:12px 24px;display:flex;align-items:center;gap:16px}
+.logo{font-family:'Quicksand',sans-serif;font-weight:800;font-size:24px;color:var(--pri);white-space:nowrap;letter-spacing:-.5px}
+.logo span{color:var(--acc)}
+.prog-w{flex:1;display:flex;align-items:center;gap:12px}
+.prog-t{flex:1;height:10px;background:var(--pri-l);border-radius:5px;overflow:hidden}
+.prog-f{height:100%;background:linear-gradient(90deg,var(--pri),var(--ok));border-radius:5px;transition:width .5s ease;width:0%}
+.prog-lb{font-size:15px;font-weight:800;color:var(--pri);min-width:42px;text-align:right}
+.lvl-b{padding:4px 14px;border-radius:20px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+.lvl-b.b{background:var(--ok-l);color:var(--ok)}.lvl-b.i{background:var(--blu-l);color:var(--blu)}.lvl-b.a{background:var(--pur-l);color:var(--pur)}
+.layout{display:flex;min-height:calc(100vh - 52px)}
+.sidebar{width:290px;min-width:290px;background:var(--card);border-right:1px solid var(--brd);padding:16px 10px;overflow-y:auto;position:sticky;top:52px;height:calc(100vh - 52px)}
+.sidebar::-webkit-scrollbar{width:4px}.sidebar::-webkit-scrollbar-thumb{background:var(--brd);border-radius:2px}
+.sb-sec{padding:12px 12px 4px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--txt-m)}
+.sb-i{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--rx);cursor:pointer;transition:all var(--t);font-size:15px;font-weight:600;color:var(--txt-l);border:2px solid transparent;margin-bottom:1px}
+.sb-i:hover{background:var(--pri-ll);color:var(--pri-d)}
+.sb-i.on{background:var(--pri);color:#fff;border-color:var(--pri-d);font-weight:700}
+.sb-i.dn{color:var(--ok)}.sb-i.dn::after{content:'✓';margin-left:auto;font-weight:900;font-size:15px}
+.sb-ic{font-size:20px;width:26px;text-align:center;flex-shrink:0}
+.main{flex:1;padding:36px 48px 100px;max-width:860px}
+.lh-b{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.lh-b.b{background:var(--ok-l);color:var(--ok)}.lh-b.i{background:var(--blu-l);color:var(--blu)}.lh-b.a{background:var(--pur-l);color:var(--pur)}
+.lh-t{font-family:'Quicksand',sans-serif;font-weight:900;font-size:38px;color:var(--pri-d);line-height:1.2;margin-bottom:12px;letter-spacing:-.5px}
+.lh-d{font-size:22px;color:var(--txt-l);max-width:600px;margin-bottom:32px}
+.blk{background:var(--card);border-radius:var(--r);padding:32px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.04);border:1px solid var(--brd);transition:border-color var(--t)}
+.blk:hover{border-color:var(--pri-l)}
+.bt{font-family:'Quicksand',sans-serif;font-weight:700;font-size:26px;color:var(--pri-d);margin-bottom:14px;display:flex;align-items:center;gap:10px;line-height:1.3}
+.bt .ic{font-size:28px}
+.bx{font-size:21px;line-height:1.8}
+.bx strong{color:var(--pri-d)}
+.tip{border-left:5px solid var(--pri);background:var(--pri-ll);border-radius:0 var(--rx) var(--rx) 0;padding:20px 24px;margin:20px 0;font-size:20px}
+.tip-l{font-weight:800;color:var(--pri-d);font-size:15px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.wrn{border-left:5px solid var(--warn);background:var(--warn-l);border-radius:0 var(--rx) var(--rx) 0;padding:20px 24px;margin:20px 0;font-size:20px}
+.iph{border-left:5px solid var(--blu);background:var(--blu-l);border-radius:0 var(--rx) var(--rx) 0;padding:20px 24px;margin:20px 0;font-size:20px}
+.iph .tip-l{color:var(--blu)}
+.key{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 12px;background:linear-gradient(180deg,#f8f9fa,#e9ecef);border:2px solid #ced4da;border-bottom:4px solid #adb5bd;border-radius:8px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:15px;color:var(--txt);box-shadow:0 1px 3px rgba(0,0,0,.08);vertical-align:middle;margin:2px 3px;white-space:nowrap}
+.key.hl{background:linear-gradient(180deg,var(--acc-l),#F4A583);border-color:var(--acc);color:#a33d18;animation:kp 2s infinite}
+@keyframes kp{0%,100%{box-shadow:0 1px 3px rgba(0,0,0,.08)}50%{box-shadow:0 2px 12px rgba(212,87,42,.25)}}
+.st{width:100%;border-collapse:separate;border-spacing:0 6px;margin:16px 0}
+.st td{padding:14px 18px;font-size:20px;vertical-align:middle}
+.st tr td:first-child{background:var(--pri-ll);border-radius:var(--rx) 0 0 var(--rx);font-weight:700;color:var(--pri-d);white-space:nowrap;width:35%}
+.st tr td:last-child{background:#F9FAFB;border-radius:0 var(--rx) var(--rx) 0}
+.ex{background:linear-gradient(135deg,var(--pri-ll),#E8F5E9);border:3px dashed var(--pri);border-radius:var(--r);padding:32px;margin:24px 0;text-align:center}
+.ex-lb{display:inline-block;background:var(--pri);color:#fff;padding:4px 16px;border-radius:20px;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.ex-t{font-family:'Quicksand',sans-serif;font-weight:800;font-size:24px;color:var(--pri-d);margin-bottom:12px}
+.ex-i{font-size:21px;margin-bottom:20px}
+.ti{width:100%;max-width:480px;padding:16px 22px;font-family:'Nunito',sans-serif;font-size:26px;border:3px solid var(--brd);border-radius:var(--rs);background:#fff;color:var(--txt);outline:none;transition:border-color var(--t);text-align:center}
+.ti:focus{border-color:var(--pri);box-shadow:0 0 0 4px rgba(27,107,74,.12)}
+.ti.ok{border-color:var(--ok);background:var(--ok-l)}
+.fb{padding:16px 24px;border-radius:var(--rx);font-size:21px;font-weight:700;margin:16px auto;max-width:480px;display:none;align-items:center;gap:10px;animation:fi .3s ease}
+.fb.sh{display:flex}
+.fb.ok{background:var(--ok-l);color:var(--ok);border:2px solid var(--ok)}
+.fb.inf{background:var(--blu-l);color:var(--blu);border:2px solid var(--blu)}
+@keyframes fi{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.kb{background:#1A1A2E;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px;max-width:680px;margin:20px auto;box-shadow:0 10px 40px rgba(0,0,0,.1)}
+.kb-r{display:flex;gap:5px;justify-content:center}
+.kb-k{min-width:40px;height:40px;padding:0 7px;background:linear-gradient(180deg,#3a3a4e,#2d2d40);border:1px solid #4a4a5e;border-bottom:3px solid #222236;border-radius:5px;color:#bbb;font-family:'Quicksand',sans-serif;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .12s;flex-shrink:0}
+.kb-k.on{background:linear-gradient(180deg,var(--pri),var(--pri-d));color:#fff;border-color:var(--ok);box-shadow:0 0 8px rgba(5,150,105,.35);transform:scale(1.06)}
+.tpb{width:300px;height:200px;background:linear-gradient(145deg,#dcdcdc,#c4c4c4);border-radius:14px;border:2px solid #aaa;margin:20px auto;position:relative;cursor:pointer;overflow:hidden;touch-action:none}
+.tpc{width:18px;height:18px;background:var(--acc);border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transition:all .08s ease-out;box-shadow:0 2px 6px rgba(212,87,42,.3);pointer-events:none}
+.tpl{text-align:center;font-size:18px;color:var(--txt-l);margin-top:8px}
+.gb{width:280px;height:180px;background:linear-gradient(145deg,#dcdcdc,#c4c4c4);border-radius:14px;border:2px solid #aaa;margin:16px auto;position:relative;overflow:hidden}
+.gd{width:22px;height:22px;border-radius:50%;position:absolute;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.gd.a{background:var(--acc)}.gd.b{background:var(--pri)}
+.gs .gd{left:45%;animation:gS 2.5s ease-in-out infinite}.gs .gd.b{left:55%;animation-delay:.04s}
+@keyframes gS{0%,10%{top:68%;opacity:1}45%{top:22%;opacity:1}55%,100%{top:22%;opacity:0}}
+.gz .gd.a{top:50%;animation:gZ1 2.5s ease-in-out infinite}.gz .gd.b{top:50%;animation:gZ2 2.5s ease-in-out infinite}
+@keyframes gZ1{0%,10%{left:42%;opacity:1}45%{left:20%;opacity:1}55%,100%{left:20%;opacity:0}}
+@keyframes gZ2{0%,10%{left:58%;opacity:1}45%{left:80%;opacity:1}55%,100%{left:80%;opacity:0}}
+.gsw .gd{transform:translateY(-50%);animation:gSw 2.5s ease-in-out infinite}.gsw .gd:nth-child(1){top:38%}.gsw .gd:nth-child(2){top:50%;animation-delay:.04s}.gsw .gd:nth-child(3){top:62%;animation-delay:.08s}
+@keyframes gSw{0%,10%{left:22%;opacity:1}45%{left:72%;opacity:1}55%,100%{left:72%;opacity:0}}
+.ca{width:100%;height:280px;background:#f8f9fa;border-radius:var(--rs);position:relative;overflow:hidden;border:2px solid var(--brd);cursor:pointer}
+.ct{width:64px;height:64px;background:var(--acc);border-radius:50%;position:absolute;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 3px 10px rgba(212,87,42,.3);animation:pi .25s ease;transition:transform .1s}
+.ct:hover{transform:scale(1.12)}
+@keyframes pi{from{transform:scale(0)}to{transform:scale(1)}}
+.sb{height:240px;overflow-y:auto;border:3px solid var(--pri-l);border-radius:var(--rs);padding:16px;background:#fff;scroll-behavior:smooth}
+.sb .si{padding:14px;margin:6px 0;background:var(--pri-ll);border-radius:8px;font-size:20px;text-align:center;font-weight:600;color:var(--pri-d)}
+.sb .st2{background:var(--acc);color:#fff;font-size:22px;padding:18px;animation:tg 2s infinite}
+@keyframes tg{0%,100%{box-shadow:0 0 0 rgba(212,87,42,0)}50%{box-shadow:0 0 18px rgba(212,87,42,.35)}}
+.steps{counter-reset:sc;margin:16px 0}
+.step{counter-increment:sc;padding:16px 16px 16px 56px;position:relative;margin-bottom:8px;border-radius:var(--rx);background:var(--pri-ll);font-size:20px}
+.step::before{content:counter(sc);position:absolute;left:16px;top:16px;width:28px;height:28px;background:var(--pri);color:#fff;border-radius:50%;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.qo{display:block;width:100%;max-width:480px;margin:8px auto;padding:16px 24px;background:#fff;border:3px solid var(--brd);border-radius:var(--rs);font-family:'Nunito',sans-serif;font-size:20px;font-weight:600;cursor:pointer;transition:all var(--t);text-align:left}
+.qo:hover{border-color:var(--pri);background:var(--pri-ll)}
+.qo.c{border-color:var(--ok);background:var(--ok-l);color:var(--ok)}.qo.w{border-color:var(--err);background:var(--err-l);color:var(--err)}.qo.d{pointer-events:none;opacity:.6}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:20px;border:none;border-radius:var(--rs);cursor:pointer;transition:all var(--t)}
+.btn-p{background:var(--pri);color:#fff}.btn-p:hover{background:var(--pri-d);transform:translateY(-2px)}
+.btn-o{background:transparent;color:var(--pri);border:2px solid var(--pri)}.btn-o:hover{background:var(--pri-ll)}
+.btn-lg{padding:18px 44px;font-size:24px;border-radius:16px}
+.lnav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:28px;border-top:1px solid var(--brd)}
+.welcome{text-align:center;padding:48px 16px}
+.welcome-ic{font-size:72px;margin-bottom:20px;animation:wave 1.5s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:rotate(0)}25%{transform:rotate(14deg)}75%{transform:rotate(-10deg)}}
+.welcome-t{font-family:'Quicksand',sans-serif;font-weight:900;font-size:44px;color:var(--pri-d);margin-bottom:16px;letter-spacing:-1px}
+.welcome-s{font-size:24px;color:var(--txt-l);max-width:520px;margin:0 auto 36px}
+.mnav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(255,251,245,.94);backdrop-filter:blur(20px);border-top:1px solid var(--brd);padding:10px 16px;justify-content:space-between;z-index:1000}
+@media(max-width:960px){.sidebar{display:none}.main{padding:20px 16px 80px}.lh-t{font-size:30px}.mnav{display:flex}.lnav{display:none}.kb{max-width:100%;padding:10px}.kb-k{min-width:28px;height:32px;font-size:10px}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}.fiu{animation:fadeInUp .5s ease both}
+.sb-search{width:100%;padding:10px 14px;border:2px solid var(--brd);border-radius:var(--rx);font-family:'Nunito',sans-serif;font-size:15px;outline:none;margin-bottom:8px;transition:border-color var(--t);box-sizing:border-box}.sb-search:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(27,107,74,.1)}
+.sb-count{text-align:center;font-size:13px;color:var(--txt-m);font-weight:700;padding:4px 0 10px;border-bottom:1px solid var(--brd);margin-bottom:8px}
+.sb-ic svg{width:20px!important;height:20px!important;margin-right:0!important}
+.ex-res{display:none;background:linear-gradient(135deg,var(--pri-l),#C3F7D5);border:3px solid var(--pri);border-radius:var(--r);padding:32px;margin:24px 0;text-align:center}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="logo">Aprende<span>Mac</span></div>
+  <div class="prog-w"><div class="prog-t"><div class="prog-f" id="pBar"></div></div><div class="prog-lb" id="pLbl">0%</div></div>
+  <div class="lvl-b b" id="lvlB">Principiante</div>
+</div>
+<div class="layout">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="main" id="main"></main>
+</div>
+<div class="mnav"><button class="btn btn-o" onclick="prev()">&#8592; Anterior</button><button class="btn btn-p" onclick="next()">Siguiente &#8594;</button></div>
+
+<script>
+// ==========================================
+// APP ICON SVGs (macOS-style)
+// ==========================================
+function appIcon(app){
+const s=32,r=7;
+const bg=(c,body)=>`<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}" style="vertical-align:middle;display:inline-block;margin-right:6px"><rect width="${s}" height="${s}" rx="${r}" fill="${c}"/>${body}</svg>`;
+const bgGrad=(id,c1,c2,body)=>`<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}" style="vertical-align:middle;display:inline-block;margin-right:6px"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><rect width="${s}" height="${s}" rx="${r}" fill="url(#${id})"/>${body}</svg>`;
+const icons={
+finder:bg('#4A90D9',`<circle cx="11" cy="13" r="2.2" fill="#fff"/><circle cx="21" cy="13" r="2.2" fill="#fff"/><circle cx="11" cy="13" r="1" fill="#222"/><circle cx="21" cy="13" r="1" fill="#222"/><path d="M11 20 Q16 24 21 20" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>`),
+safari:bgGrad('sg','#1E88E5','#0D47A1',`<circle cx="16" cy="16" r="10" fill="none" stroke="#fff" stroke-width="1.5"/><polygon points="16,6 18.5,14 16,16 13.5,14" fill="#E53935"/><polygon points="16,26 13.5,18 16,16 18.5,18" fill="#fff"/><polygon points="6,16 14,13.5 16,16 14,18.5" fill="#fff" opacity=".7"/><polygon points="26,16 18,18.5 16,16 18,13.5" fill="#E53935" opacity=".7"/>`),
+mail:bg('#3B82F6',`<rect x="6" y="10" width="20" height="14" rx="2" fill="#fff"/><path d="M6 12 L16 19 L26 12" stroke="#3B82F6" stroke-width="2" fill="none"/>`),
+fotos:bg('#fff',`<circle cx="16" cy="10.5" r="3.5" fill="#E53935"/><circle cx="21" cy="13" r="3.5" fill="#F59E0B"/><circle cx="19.5" cy="19" r="3.5" fill="#10B981"/><circle cx="12.5" cy="19" r="3.5" fill="#3B82F6"/><circle cx="11" cy="13" r="3.5" fill="#8B5CF6"/><circle cx="16" cy="15.5" r="2" fill="#F59E0B" opacity=".6"/>`),
+mensajes:bg('#34C759',`<rect x="7" y="8" width="18" height="13" rx="6" fill="#fff"/><polygon points="12,21 10,26 17,21" fill="#fff"/>`),
+facetime:bg('#34C759',`<rect x="6" y="10" width="14" height="12" rx="3" fill="#fff"/><polygon points="22,12 27,9 27,23 22,20" fill="#fff"/>`),
+notas:bg('#FBBF24',`<rect x="7" y="6" width="18" height="20" rx="2" fill="#fff"/><line x1="10" y1="12" x2="22" y2="12" stroke="#D4A017" stroke-width="1.5"/><line x1="10" y1="16" x2="22" y2="16" stroke="#D4A017" stroke-width="1.5"/><line x1="10" y1="20" x2="18" y2="20" stroke="#D4A017" stroke-width="1.5"/>`),
+calendario:(()=>{const d=new Date().getDate();return `<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}" style="vertical-align:middle;display:inline-block;margin-right:6px"><rect width="${s}" height="${s}" rx="${r}" fill="#fff" stroke="#E5E7EB" stroke-width="1"/><rect y="0" width="${s}" height="10" rx="${r}" fill="#E53935"/><rect y="5" width="${s}" height="5" fill="#E53935"/><text x="16" y="24" text-anchor="middle" font-family="Quicksand,sans-serif" font-weight="800" font-size="15" fill="#1A1A2E">${d}</text></svg>`})(),
+ajustes:bg('#6B7280',`<circle cx="16" cy="16" r="6" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="16" cy="16" r="2.5" fill="#fff"/><line x1="16" y1="4" x2="16" y2="9" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="23" x2="16" y2="28" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="4" y1="16" x2="9" y2="16" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="23" y1="16" x2="28" y2="16" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="7.5" y1="7.5" x2="11" y2="11" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="21" y1="21" x2="24.5" y2="24.5" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="7.5" y1="24.5" x2="11" y2="21" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="21" y1="11" x2="24.5" y2="7.5" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>`),
+musica:bgGrad('mg','#EC4899','#EF4444',`<circle cx="12" cy="22" r="4" fill="#fff"/><circle cx="22" cy="20" r="4" fill="#fff"/><rect x="15" y="8" width="3" height="14" rx="1" fill="#fff"/><rect x="25" y="6" width="3" height="14" rx="1" fill="#fff"/><rect x="15" y="6" width="13" height="3" rx="1" fill="#fff"/>`),
+appstore:bgGrad('asg','#2196F3','#1565C0',`<path d="M16 7l-5.5 16h3l1.2-3.5h6.6l1.2 3.5h3L16 7zm0 4.5l2.3 7h-4.6L16 11.5z" fill="#fff"/>`),
+whatsapp:bg('#25D366',`<path d="M16 6.5C10.8 6.5 6.5 10.5 6.5 15.4c0 1.7.5 3.3 1.3 4.7L6 26l6.1-1.6c1.3.7 2.8 1.1 4.3 1.1 5.2 0 9.5-4 9.5-8.9S21.2 6.5 16 6.5z" fill="#fff"/><path d="M20 18.3c-.2.6-1.3 1.2-1.8 1.3-.5.1-1 .2-3.2-.7a11.3 11.3 0 01-4.5-4c-.2-.2-1-1.4-1-2.7s.7-1.9.9-2.1c.3-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .4-.1.2-.2.3-.3.4l-.4.4c.2.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.2 1.3.2.1.4.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1l2 .9c.3.1.4.2.5.3 0 .2 0 .7-.3 1.4z" fill="#25D366"/>`),
+youtube:bg('#FF0000',`<polygon points="13,10 13,22 23,16" fill="#fff"/>`),
+outlook:bg('#0078D4',`<rect x="6" y="9" width="20" height="14" rx="2" fill="#fff" opacity=".25"/><path d="M6 11l10 7 10-7" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="6" y="9" width="20" height="14" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><text x="16" y="21" text-anchor="middle" font-family="Quicksand,sans-serif" font-weight="900" font-size="11" fill="#fff">O</text>`),
+spotlight:bg('#5AC8FA',`<circle cx="14" cy="14" r="6" fill="none" stroke="#fff" stroke-width="2.5"/><line x1="18.5" y1="18.5" x2="24" y2="24" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>`),
+siri:bgGrad('si','#7B68EE','#5856D6',`<line x1="8" y1="13" x2="8" y2="19" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="10" x2="12" y2="22" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="25" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="10" x2="20" y2="22" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="24" y1="13" x2="24" y2="19" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`),
+icloud:bg('#fff',`<rect x=".5" y=".5" width="31" height="31" rx="7" fill="none" stroke="#E5E7EB" stroke-width="1"/><circle cx="13" cy="15" r="4.5" fill="#3B82F6"/><circle cx="20" cy="14" r="5" fill="#3B82F6"/><rect x="8" y="17" width="17" height="5" rx="2.5" fill="#3B82F6"/>`),
+mapas:bg('#34C759',`<path d="M16 6a6.5 6.5 0 00-6.5 6.5C9.5 17 16 26 16 26s6.5-9 6.5-13.5A6.5 6.5 0 0016 6z" fill="#fff"/><circle cx="16" cy="12.5" r="2.5" fill="#34C759"/>`),
+tiempo:bg('#87CEEB',`<circle cx="12" cy="12" r="4.5" fill="#FFD700"/><line x1="12" y1="5.5" x2="12" y2="7" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="17" x2="12" y2="18.5" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round"/><line x1="5.5" y1="12" x2="7" y2="12" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round"/><line x1="17" y1="12" x2="18.5" y2="12" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round"/><circle cx="19" cy="20" r="3.5" fill="#fff"/><circle cx="24" cy="19" r="3" fill="#fff"/><rect x="14.5" y="21" width="13" height="4" rx="2" fill="#fff"/>`),
+recordatorios:bg('#fff',`<rect x=".5" y=".5" width="31" height="31" rx="7" fill="none" stroke="#E5E7EB" stroke-width="1"/><circle cx="11" cy="11" r="2" fill="#3B82F6"/><circle cx="11" cy="17" r="2" fill="#E53935"/><circle cx="11" cy="23" r="2" fill="#F59E0B"/><line x1="16" y1="11" x2="24" y2="11" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="17" x2="24" y2="17" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="23" x2="22" y2="23" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/>`),
+papelera:bg('#9CA3AF',`<path d="M12 12h8v11a2 2 0 01-2 2h-4a2 2 0 01-2-2V12z" fill="#fff"/><rect x="10" y="9.5" width="12" height="2" rx="1" fill="#fff"/><rect x="14" y="7" width="4" height="3" rx="1" fill="#fff"/>`),
+launchpad:bg('#374151',`<path d="M16 6c-1.8 3.5-3 7.5-3 11a3 3 0 006 0c0-3.5-1.2-7.5-3-11z" fill="#fff"/><circle cx="16" cy="15" r="1.5" fill="#374151"/><path d="M13.5 20l-2 4.5h2l1-2.5" fill="#fff"/><path d="M18.5 20l2 4.5h-2l-1-2.5" fill="#fff"/>`),
+chrome:bg('#fff',`<circle cx="16" cy="16" r="11" fill="#EA4335"/><path d="M16 5A11 11 0 004.5 21.5L16 16z" fill="#FBBC05"/><path d="M4.5 21.5A11 11 0 0027 16L16 16z" fill="#34A853"/><circle cx="16" cy="16" r="5" fill="#fff"/><circle cx="16" cy="16" r="3.8" fill="#4285F4"/>`),
+telegram:bg('#0088CC',`<path d="M6 15.5l19-8.5-5 18-5.5-5.5L6 15.5z" fill="#fff"/><path d="M14.5 19.5L16 25 25 7l-10.5 12.5z" fill="#006699"/>`),
+vlc:bg('#FF6600',`<path d="M12 24h8l-2-14h-4L12 24z" fill="#fff"/><rect x="10" y="24" width="12" height="2" rx="1" fill="#fff"/>`),
+llavero:bg('#6B7280',`<circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="2.5"/><line x1="15.5" y1="15.5" x2="24" y2="24" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="20" y1="21" x2="23" y2="18" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>`)
+};
+return icons[app.toLowerCase()]||'';
+}
+// Shorthand
+const AI=(a)=>appIcon(a);
+
+// ==========================================
+// LESSON DATA - 22 LESSONS, 3 LEVELS
+// ==========================================
+const L=[
+
+// ==================== WELCOME ====================
+{id:'welcome',title:'Bienvenido',icon:'\u{1F44B}',sec:'Inicio',lv:'b',
+c:()=>`<div class="welcome">
+<div class="welcome-ic fiu">\u{1F5A5}\u{FE0F}</div>
+<h1 class="welcome-t fiu" style="animation-delay:.15s">\u{00A1}Bienvenido a tu Mac!</h1>
+<p class="welcome-s fiu" style="animation-delay:.3s">Esta gu\u{00ED}a te ense\u{00F1}ar\u{00E1} paso a paso a usar tu nuevo ordenador. Sin prisas, a tu ritmo, con ejercicios pr\u{00E1}cticos.</p>
+<div class="fiu" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:28px 0;animation-delay:.45s">
+<div class="lvl-b b" style="font-size:16px;padding:8px 20px">\u{1F7E2} Principiante \u{2014} Lo esencial</div>
+<div class="lvl-b i" style="font-size:16px;padding:8px 20px">\u{1F535} Intermedio \u{2014} M\u{00E1}s utilidades</div>
+<div class="lvl-b a" style="font-size:16px;padding:8px 20px">\u{1F7E3} Avanzado \u{2014} iPhone+Mac y trucos</div>
+</div>
+<div class="tip fiu" style="animation-delay:.6s"><div class="tip-l">\u{1F4A1} Consejo</div>Ve a tu ritmo. Puedes cerrar esta p\u{00E1}gina y volver cuando quieras.</div><br>
+<button class="btn btn-p btn-lg fiu" style="animation-delay:.75s" onclick="next()">Empezar el curso \u{2192}</button>
+</div>`},
+
+// ==================== PRINCIPIANTE: TECLADO ====================
+{id:'kb1',title:'Partes del teclado',icon:'\u{2328}\u{FE0F}',sec:'El Teclado',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F7E2} Principiante</div>
+<h1 class="lh-t">Las partes del teclado</h1>
+<p class="lh-d">Conoce las zonas m\u{00E1}s importantes del teclado de tu Mac.</p>
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F520}</span> Las letras</h2>
+<p class="bx">En el centro del teclado est\u{00E1}n las <strong>letras del abecedario</strong>, organizadas como en una m\u{00E1}quina de escribir. La primera fila empieza con Q, W, E, R, T, Y... por eso se llama teclado <strong>QWERTY</strong>.</p>
+<div class="kb" id="kbM"><div class="kb-r">${['Q','W','E','R','T','Y','U','I','O','P'].map(k=>`<div class="kb-k">${k}</div>`).join('')}</div>
+<div class="kb-r">${['A','S','D','F','G','H','J','K','L','\u{00D1}'].map(k=>`<div class="kb-k">${k}</div>`).join('')}</div>
+<div class="kb-r">${['Z','X','C','V','B','N','M'].map(k=>`<div class="kb-k">${k}</div>`).join('')}</div></div>
+<div class="tip"><div class="tip-l">\u{1F4A1} Prueba ahora</div>Pulsa letras en tu teclado y ver\u{00E1}s c\u{00F3}mo se iluminan arriba.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4CC}</span> Teclas especiales</h2>
+<p class="bx">Alrededor de las letras hay teclas con funciones especiales:</p>
+<table class="st"><tr><td><span class="key" style="min-width:80px">Espacio</span></td><td>La barra larga de abajo. Pone un <strong>espacio</strong> entre palabras.</td></tr>
+<tr><td><span class="key">\u{232B}</span></td><td><strong>Borrar.</strong> Borra la letra que hay a la izquierda del cursor.</td></tr>
+<tr><td><span class="key">Enter \u{23CE}</span></td><td><strong>Aceptar</strong> o bajar a <strong>l\u{00ED}nea nueva</strong>.</td></tr>
+<tr><td><span class="key">\u{21E7} Shift</span></td><td>Mantener pulsada para escribir <strong>MAY\u{00DA}SCULAS</strong>.</td></tr>
+<tr><td><span class="key">\u{21EA}</span></td><td><strong>Bloq May\u{00FA}s.</strong> Todo en may\u{00FA}scula hasta que la pulses de nuevo.</td></tr>
+<tr><td><span class="key">Tab \u{21E5}</span></td><td>Saltar al siguiente campo en formularios.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F34E}</span> Teclas del Mac</h2>
+<p class="bx">Tu Mac tiene teclas especiales diferentes a otros ordenadores:</p>
+<table class="st"><tr><td><span class="key">\u{2318} Cmd</span></td><td>La tecla <strong>Comando</strong>. La m\u{00E1}s importante. Se usa para atajos r\u{00E1}pidos.</td></tr>
+<tr><td><span class="key">\u{2325} Option</span></td><td>La tecla <strong>Opci\u{00F3}n</strong>. Para caracteres especiales (@, \u{20AC}...).</td></tr>
+<tr><td><span class="key">fn</span></td><td><strong>Funci\u{00F3}n</strong>. Cambia el comportamiento de F1-F12.</td></tr>
+<tr><td><span class="key">\u{2303} Ctrl</span></td><td>Se usa poco, pero algunos programas la necesitan.</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Tranquilo</div>No hace falta memorizar nada ahora. Las ir\u{00E1}s aprendiendo con la pr\u{00E1}ctica.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F506}</span> Fila de arriba</h2>
+<p class="bx">Las teclas m\u{00E1}s altas del teclado controlan funciones del sistema:</p>
+<table class="st"><tr><td>\u{1F505} / \u{1F506}</td><td><strong>Brillo</strong> de pantalla (m\u{00E1}s claro/oscuro).</td></tr>
+<tr><td>\u{1F508} / \u{1F509} / \u{1F50A}</td><td><strong>Volumen</strong> (subir, bajar, silenciar).</td></tr>
+<tr><td>\u{23EF}\u{FE0F}</td><td><strong>Play/Pausa</strong> para m\u{00FA}sica y v\u{00ED}deos.</td></tr></table></div>`},
+
+{id:'kb2',title:'Escribir texto',icon:'\u{270F}\u{FE0F}',sec:'El Teclado',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F7E2} Principiante</div>
+<h1 class="lh-t">Practicar a escribir</h1>
+<p class="lh-d">Practica con el teclado. Escribe lo que se pide en cada ejercicio.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">1\u{FE0F}\u{20E3}</span> Escribe tu nombre</h2>
+<p class="bx">Haz clic en el recuadro y escribe tu nombre. Para la may\u{00FA}scula inicial, mant\u{00E9}n <span class="key">\u{21E7} Shift</span> pulsada.</p>
+<div class="ex"><div class="ex-lb">Ejercicio</div><div class="ex-i">Escribe tu nombre:</div>
+<input type="text" class="ti" id="exN" placeholder="Tu nombre...">
+<div class="fb ok" id="fbN">\u{1F44F} \u{00A1}Muy bien! Has escrito tu nombre.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">2\u{FE0F}\u{20E3}</span> Escribe una frase</h2>
+<p class="bx">Escribe esta frase <strong>exacta</strong>, con may\u{00FA}scula y punto final:</p>
+<div class="ex"><div class="ex-lb">Ejercicio</div>
+<div style="font-size:28px;font-weight:800;color:var(--pri-d);margin-bottom:16px">Hola, me llamo Pedro.</div>
+<input type="text" class="ti" id="exP" placeholder="Escribe la frase...">
+<div class="fb ok" id="fbP">\u{1F44F} \u{00A1}Perfecto! Frase correcta.</div>
+<div class="fb inf" id="fbPH">\u{1F4A1} Recuerda: Shift+H al inicio y punto al final.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">3\u{FE0F}\u{20E3}</span> S\u{00ED}mbolos especiales</h2>
+<p class="bx">Los <strong>n\u{00FA}meros</strong> est\u{00E1}n en la fila de arriba. Para s\u{00ED}mbolos:</p>
+<table class="st"><tr><td><span class="key">\u{2325}</span>+<span class="key">2</span></td><td>@ (arroba, para correos)</td></tr>
+<tr><td><span class="key">\u{2325}</span>+<span class="key">3</span></td><td>\u{20AC} (euro)</td></tr>
+<tr><td><span class="key">\u{21E7}</span>+<span class="key">1</span></td><td>! (exclamaci\u{00F3}n)</td></tr>
+<tr><td><span class="key">\u{21E7}</span>+<span class="key">'</span></td><td>? (interrogaci\u{00F3}n)</td></tr></table>
+<div class="ex"><div class="ex-lb">Ejercicio</div><div class="ex-i">Escribe un correo inventado (ejemplo: pepe@gmail.com):</div>
+<input type="text" class="ti" id="exE" placeholder="algo@correo.com">
+<div class="fb ok" id="fbE">\u{1F44F} \u{00A1}Genial! Ya dominas la arroba.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">4\u{FE0F}\u{20E3}</span> Acentos y \u{00D1}</h2>
+<table class="st"><tr><td><strong>\u{00E9}, \u{00E1}, \u{00ED}, \u{00F3}, \u{00FA}</strong></td><td>Pulsa la tecla del <strong>acento \u{00B4}</strong> (al lado de \u{00D1}) y luego la vocal.</td></tr>
+<tr><td><strong>\u{00D1}</strong></td><td>Tiene su propia tecla, entre la L y el acento.</td></tr></table>
+<div class="ex"><div class="ex-lb">Ejercicio</div><div class="ex-i">Escribe: <strong>Espa\u{00F1}a es fant\u{00E1}stica</strong></div>
+<input type="text" class="ti" id="exA" placeholder="Espa\u{00F1}a es fant\u{00E1}stica">
+<div class="fb ok" id="fbA">\u{1F44F} \u{00A1}Excelente! Dominas \u{00D1} y acentos.</div></div></div>`},
+
+{id:'kb3',title:'Atajos b\u{00E1}sicos',icon:'\u{26A1}',sec:'El Teclado',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F7E2} Principiante</div>
+<h1 class="lh-t">Atajos de teclado esenciales</h1>
+<p class="lh-d">Los atajos te permiten hacer cosas m\u{00E1}s r\u{00E1}pido. Todos usan la tecla \u{2318} Cmd.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{2702}\u{FE0F}</span> Copiar, Pegar, Deshacer</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">C</span></td><td><strong>Copiar</strong> el texto seleccionado.</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">V</span></td><td><strong>Pegar</strong> lo copiado.</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">X</span></td><td><strong>Cortar</strong> (copiar y borrar original).</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">Z</span></td><td><strong>Deshacer</strong>. Tu mejor amigo si te equivocas.</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">A</span></td><td><strong>Seleccionar todo</strong> el texto.</td></tr></table>
+<div class="iph"><div class="tip-l">\u{1F4F1} Como en el iPhone</div>Si mantienes pulsado un texto en el iPhone tambi\u{00E9}n puedes Copiar y Pegar. \u{00A1}Mismo concepto!</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F5D2}\u{FE0F}</span> Practica: Copiar y Pegar</h2>
+<div class="ex"><div class="ex-lb">Ejercicio</div>
+<div class="ex-i">1. Clic en el primer recuadro \u{2192} <span class="key">\u{2318}</span>+<span class="key">A</span><br>2. <span class="key">\u{2318}</span>+<span class="key">C</span><br>3. Clic en el segundo \u{2192} <span class="key">\u{2318}</span>+<span class="key">V</span></div>
+<input type="text" class="ti" id="exCS" value="\u{00A1}Hola mundo!" readonly style="background:#f0f0f0;margin-bottom:12px">
+<input type="text" class="ti" id="exCD" placeholder="Pega aqu\u{00ED}...">
+<div class="fb ok" id="fbC">\u{1F44F} \u{00A1}Excelente! Copiar y pegar dominado.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4D6}</span> M\u{00E1}s atajos esenciales</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">S</span></td><td><strong>Guardar</strong> documento.</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">P</span></td><td><strong>Imprimir</strong>.</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">F</span></td><td><strong>Buscar</strong> palabra en la p\u{00E1}gina.</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">Q</span></td><td><strong>Cerrar</strong> la aplicaci\u{00F3}n.</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">W</span></td><td><strong>Cerrar</strong> la ventana (no la app).</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">Tab</span></td><td><strong>Cambiar</strong> entre aplicaciones abiertas.</td></tr></table>
+<div class="wrn"><strong>\u{26A0}\u{FE0F} Recuerda:</strong> <span class="key">\u{2318}</span>+<span class="key">Z</span> deshace casi todo. \u{00A1}\u{00DA}salo sin miedo!</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F9E0}</span> Quiz</h2>
+<div class="ex"><div class="ex-lb">Quiz</div><div class="ex-t">\u{00BF}Qu\u{00E9} atajo es PEGAR?</div>
+<button class="qo" onclick="qz(this,'w')">A) \u{2318} + C</button>
+<button class="qo" onclick="qz(this,'c')">B) \u{2318} + V</button>
+<button class="qo" onclick="qz(this,'w')">C) \u{2318} + Z</button>
+<button class="qo" onclick="qz(this,'w')">D) \u{2318} + X</button>
+<div class="fb ok" id="fbQ1">\u{1F44F} \u{00A1}Correcto! \u{2318}+V = Pegar.</div></div></div>`},
+
+// ==================== PRINCIPIANTE: TRACKPAD ====================
+{id:'tp1',title:'Usar el trackpad',icon:'\u{1F590}',sec:'El Trackpad',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F7E2} Principiante</div>
+<h1 class="lh-t">El trackpad: lo b\u{00E1}sico</h1>
+<p class="lh-d">El trackpad sustituye al rat\u{00F3}n. Se usa tocando suavemente con los dedos.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{261D}\u{FE0F}</span> Mover el cursor</h2>
+<p class="bx">Desliza <strong>un dedo</strong> suavemente por el trackpad. El cursor (flechita) se mover\u{00E1} en pantalla. <strong>No hace falta apretar</strong>.</p>
+<div class="tpb" id="tpD"><div class="tpc" id="tpC"></div></div>
+<div class="tpl">\u{261D}\u{FE0F} Mueve el dedo por el recuadro gris</div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Como el iPhone</div>Es como cuando deslizas el dedo por la pantalla del iPhone, pero aqu\u{00ED} mueves una flechita.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F5B1}\u{FE0F}</span> Hacer clic</h2>
+<table class="st"><tr><td><strong>Tocar</strong></td><td>Un golpecito suave con un dedo. La forma m\u{00E1}s c\u{00F3}moda.</td></tr>
+<tr><td><strong>Presionar</strong></td><td>Presionar hasta que haga "clic" (se hunde un poco).</td></tr>
+<tr><td><strong>Doble clic</strong></td><td>Dos toques r\u{00E1}pidos. Para abrir archivos o seleccionar palabras.</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Consejo</div>Simplemente <strong>tocar con un dedo</strong> es lo m\u{00E1}s f\u{00E1}cil. No hace falta apretar fuerte.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F3AF}</span> Practica: Caza los c\u{00ED}rculos</h2>
+<p class="bx">Haz clic en los c\u{00ED}rculos naranjas. \u{00A1}Llega a 5!</p>
+<div class="ex"><div class="ex-lb">Ejercicio</div><div class="ex-i">Puntuaci\u{00F3}n: <strong id="cS">0</strong>/5</div>
+<div class="ca" id="cG"></div>
+<div class="fb ok" id="fbCl">\u{1F44F} \u{00A1}Genial! Dominas el clic.</div></div></div>`},
+
+{id:'tp2',title:'Gestos del trackpad',icon:'\u{1F91A}',sec:'El Trackpad',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F7E2} Principiante</div>
+<h1 class="lh-t">Gestos con los dedos</h1>
+<p class="lh-d">El trackpad reconoce gestos con varios dedos. Son muy c\u{00F3}modos.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{261D}\u{FE0F}</span> Desplazarse (Scroll)</h2>
+<p class="bx">Desliza <strong>dos dedos</strong> arriba/abajo para subir y bajar en una p\u{00E1}gina.</p>
+<div class="gb gs"><div class="gd a"></div><div class="gd b"></div></div>
+<div class="tpl">\u{261D}\u{FE0F} Dos dedos arriba/abajo = Subir y bajar</div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Como el iPhone</div>En el iPhone deslizas un dedo. Aqu\u{00ED} usas dos. \u{00A1}Mismo gesto!</div>
+<div class="ex" style="margin-top:20px"><div class="ex-lb">Ejercicio</div><div class="ex-t">Busca la estrella \u{2B50}</div>
+<div class="ex-i">Usa dos dedos para bajar por la lista:</div>
+<div class="sb" id="scEx">${Array.from({length:7},(_,i)=>`<div class="si">\u{1F4E6} Elemento ${i+1}</div>`).join('')}<div class="si st2" id="scT">\u{2B50} \u{00A1}Me has encontrado! \u{2B50}</div>${Array.from({length:3},(_,i)=>`<div class="si">\u{1F4E6} Elemento ${i+8}</div>`).join('')}</div>
+<div class="fb ok" id="fbSc">\u{1F44F} \u{00A1}Bien! Ya sabes desplazarte con dos dedos.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F50D}</span> Zoom (ampliar/reducir)</h2>
+<p class="bx">Pon dos dedos y <strong>sep\u{00E1}ralos</strong> para ampliar. <strong>J\u{00FA}ntalos</strong> para reducir. Igual que en el iPhone.</p>
+<div class="gb gz"><div class="gd a"></div><div class="gd b"></div></div>
+<div class="tpl">\u{1F50D} Separar = ampliar \u{00B7} Juntar = reducir</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F446}\u{1F446}</span> Clic derecho</h2>
+<p class="bx"><strong>Toca con dos dedos a la vez</strong> para abrir el men\u{00FA} de opciones (clic derecho). Muestra Copiar, Pegar, Abrir enlace, etc.</p></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F9E0}</span> Quiz</h2>
+<div class="ex"><div class="ex-lb">Quiz</div><div class="ex-t">\u{00BF}Cu\u{00E1}ntos dedos para scroll?</div>
+<button class="qo" onclick="qz(this,'w')">A) Un dedo</button>
+<button class="qo" onclick="qz(this,'c')">B) Dos dedos</button>
+<button class="qo" onclick="qz(this,'w')">C) Tres dedos</button>
+<div class="fb ok" id="fbQ2">\u{1F44F} \u{00A1}Correcto! Dos dedos para scroll.</div></div></div>
+
+<div class="tip"><div class="tip-l">\u{1F4A1} Lo esencial</div>Con <strong>mover cursor</strong>, <strong>clic</strong> y <strong>scroll con dos dedos</strong> ya puedes usar el Mac perfectamente.</div>`},
+
+// ==================== PRINCIPIANTE: SOFTWARE ====================
+{id:'sw1',title:'Escritorio y Dock',icon:'\u{1F5A5}\u{FE0F}',sec:'Usar el Mac',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F7E2} Principiante</div>
+<h1 class="lh-t">El Escritorio y el Dock</h1>
+<p class="lh-d">Lo primero que ves al encender el Mac.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F5A5}\u{FE0F}</span> Las tres zonas</h2>
+<table class="st"><tr><td>\u{25AA}\u{FE0F} <strong>Barra de men\u{00FA}s</strong></td><td>Arriba del todo. Siempre tiene el icono de Apple (\u{1F34E}) a la izquierda y WiFi/hora a la derecha.</td></tr>
+<tr><td>\u{1F5A5} <strong>Escritorio</strong></td><td>El espacio grande central. Puedes poner archivos y carpetas.</td></tr>
+<tr><td>\u{25AB}\u{FE0F} <strong>Dock</strong></td><td>Barra de abajo con iconos de aplicaciones.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4F1}</span> El Dock</h2>
+<p class="bx">La barra de iconos de abajo. <strong>Haz clic en un icono</strong> para abrir esa app.</p>
+<table class="st"><tr><td>${AI('finder')} <strong>Finder</strong></td><td>Tus archivos y carpetas.</td></tr>
+<tr><td>${AI('safari')} <strong>Safari</strong></td><td>Navegador de Internet.</td></tr>
+<tr><td>${AI('mail')} <strong>Mail</strong></td><td>Correo electr\u{00F3}nico.</td></tr>
+<tr><td>${AI('fotos')} <strong>Fotos</strong></td><td>Ver y organizar fotos.</td></tr>
+<tr><td>${AI('mensajes')} <strong>Mensajes</strong></td><td>Enviar y recibir mensajes.</td></tr>
+<tr><td>${AI('facetime')} <strong>FaceTime</strong></td><td>Videollamadas.</td></tr>
+<tr><td>${AI('notas')} <strong>Notas</strong></td><td>Escribir notas.</td></tr>
+<tr><td>${AI('calendario')} <strong>Calendario</strong></td><td>Eventos y citas.</td></tr>
+<tr><td>${AI('ajustes')} <strong>Ajustes</strong></td><td>Configurar el Mac.</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} El puntito</div>Un punto bajo el icono = app <strong>abierta</strong>.</div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Como el iPhone</div>El Dock es como la fila de abajo del iPhone con tus apps favoritas.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F34E}</span> Men\u{00FA} Apple</h2>
+<p class="bx">Esquina superior izquierda: el icono de <strong>Apple \u{1F34E}</strong>. Haz clic para:</p>
+<table class="st"><tr><td><strong>Ajustes del Sistema</strong></td><td>Cambiar configuraci\u{00F3}n.</td></tr>
+<tr><td><strong>Reiniciar</strong></td><td>Si algo va lento.</td></tr>
+<tr><td><strong>Apagar</strong></td><td>Apagar el Mac.</td></tr></table>
+<div class="wrn"><strong>\u{26A0}\u{FE0F} Siempre</strong> apaga desde \u{1F34E} \u{2192} Apagar. Nunca desenchufes directamente.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4BB}</span> Las ventanas</h2>
+<p class="bx">Cada app se abre en una ventana. Arriba a la izquierda hay 3 botones:</p>
+<table class="st"><tr><td>\u{1F534} Rojo</td><td><strong>Cerrar</strong> ventana.</td></tr>
+<tr><td>\u{1F7E1} Amarillo</td><td><strong>Minimizar</strong> (esconder en el Dock).</td></tr>
+<tr><td>\u{1F7E2} Verde</td><td><strong>Pantalla completa</strong>.</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Mover ventana</div>Clic en la barra de arriba de la ventana y arrastra.</div></div>`},
+
+{id:'sw2',title:'Safari (Internet)',icon:appIcon('safari'),sec:'Usar el Mac',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F7E2} Principiante</div>
+<h1 class="lh-t">Navegar por Internet</h1>
+<p class="lh-d">Safari es el navegador web, como en tu iPhone.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F50E}</span> Buscar algo</h2>
+<p class="bx">Abre Safari (br\u{00FA}jula azul en el Dock). Arriba ver\u{00E1}s una <strong>barra blanca</strong>:</p>
+<table class="st"><tr><td><strong>Escribir web</strong></td><td>Ejemplo: <strong>google.com</strong> y Enter.</td></tr>
+<tr><td><strong>Buscar</strong></td><td>Escribe lo que quieras (ej: "tiempo Bilbao") y Enter.</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Truco</div>No hace falta escribir "www." Pon directamente <strong>google.com</strong>.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{2194}\u{FE0F}</span> Navegar</h2>
+<table class="st"><tr><td>\u{2190} <strong>Atr\u{00E1}s</strong></td><td>Flecha izquierda arriba. P\u{00E1}gina anterior.</td></tr>
+<tr><td>\u{2192} <strong>Adelante</strong></td><td>Avanza si ya fuiste atr\u{00E1}s.</td></tr>
+<tr><td>2 dedos izq/der</td><td>En trackpad: atr\u{00E1}s/adelante.</td></tr>
+<tr><td>2 dedos arr/abj</td><td>Subir y bajar por la p\u{00E1}gina.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4D1}</span> Pesta\u{00F1}as</h2>
+<p class="bx">Puedes tener varias p\u{00E1}ginas abiertas a la vez:</p>
+<table class="st"><tr><td><strong>+</strong> o <span class="key">\u{2318}</span>+<span class="key">T</span></td><td>Nueva pesta\u{00F1}a.</td></tr>
+<tr><td>X o <span class="key">\u{2318}</span>+<span class="key">W</span></td><td>Cerrar pesta\u{00F1}a.</td></tr></table>
+<div class="iph"><div class="tip-l">\u{1F4F1} Como el iPhone</div>Las pesta\u{00F1}as son como las p\u{00E1}ginas abiertas en Safari del iPhone.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F50D}</span> Letra m\u{00E1}s grande</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">+</span></td><td><strong>M\u{00E1}s grande.</strong></td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">\u{2212}</span></td><td><strong>M\u{00E1}s peque\u{00F1}o.</strong></td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">0</span></td><td><strong>Tama\u{00F1}o normal.</strong></td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Favoritos</div>Pulsa <span class="key">\u{2318}</span>+<span class="key">D</span> para guardar una p\u{00E1}gina favorita.</div></div>`},
+
+{id:'sw3',title:'Ajustes c\u{00F3}modos',icon:appIcon('ajustes'),sec:'Usar el Mac',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F7E2} Principiante</div>
+<h1 class="lh-t">Hacer el Mac m\u{00E1}s c\u{00F3}modo</h1>
+<p class="lh-d">Ajustes para que veas bien y est\u{00E9}s a gusto.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F520}</span> Todo m\u{00E1}s grande</h2>
+<div class="steps"><div class="step">Clic en <strong>\u{1F34E} Apple</strong> (esquina superior izquierda).</div>
+<div class="step">Clic en <strong>Ajustes del Sistema</strong>.</div>
+<div class="step">Clic en <strong>Pantalla</strong>.</div>
+<div class="step">En "Resoluci\u{00F3}n": elige <strong>"M\u{00E1}s grande"</strong>.</div></div>
+<div class="tip"><div class="tip-l">\u{1F4A1} A\u{00FA}n m\u{00E1}s</div>Ajustes \u{2192} Accesibilidad \u{2192} Pantalla \u{2192} "Texto m\u{00E1}s grande" con barra deslizante.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F5B1}\u{FE0F}</span> Cursor m\u{00E1}s grande</h2>
+<div class="steps"><div class="step"><strong>\u{1F34E} Apple \u{2192} Ajustes del Sistema</strong>.</div>
+<div class="step"><strong>Accesibilidad \u{2192} Pantalla</strong>.</div>
+<div class="step">"Tama\u{00F1}o del cursor": mover barra a la derecha.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F50A}</span> Volumen</h2>
+<table class="st"><tr><td>\u{1F507} F10</td><td>Silenciar/activar.</td></tr>
+<tr><td>\u{1F509} F11</td><td>Bajar volumen.</td></tr>
+<tr><td>\u{1F50A} F12</td><td>Subir volumen.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F319}</span> Modo claro/oscuro</h2>
+<p class="bx"><strong>\u{1F34E} Apple \u{2192} Ajustes \u{2192} Aspecto</strong>: elige Claro, Oscuro o Autom\u{00E1}tico.</p></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4F6}</span> Conectar al WiFi</h2>
+<div class="steps"><div class="step">Mira arriba a la derecha: icono <strong>\u{1F4F6}</strong>.</div>
+<div class="step">Clic en \u{00E9}l.</div>
+<div class="step">Elige tu red WiFi de casa.</div>
+<div class="step">Escribe la <strong>contrase\u{00F1}a</strong> y Enter.</div></div>
+<div class="wrn"><strong>\u{26A0}\u{FE0F} La contrase\u{00F1}a</strong> suele estar detr\u{00E1}s del router o en la documentaci\u{00F3}n de tu compa\u{00F1}\u{00ED}a de Internet.</div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Truco iPhone+Mac</div>Si tu iPhone ya est\u{00E1} conectado al WiFi con el mismo Apple ID, el Mac puede conectarse <strong>autom\u{00E1}ticamente</strong> sin contrase\u{00F1}a.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4A2}</span> Velocidad del trackpad</h2>
+<p class="bx">Si el cursor va muy r\u{00E1}pido o lento: <strong>\u{1F34E} Apple \u{2192} Ajustes \u{2192} Trackpad</strong> \u{2192} ajustar "Velocidad de seguimiento".</p></div>`},
+
+{id:'sw4',title:'Texto predictivo y dictado',icon:'\u{1F4AC}',sec:'Usar el Mac',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F7E2} Principiante</div>
+<h1 class="lh-t">Texto predictivo y dictado</h1>
+<p class="lh-d">El Mac te sugiere palabras y puedes dictarle en vez de escribir.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4AC}</span> Texto predictivo</h2>
+<p class="bx">Cuando escribes, el Mac te <strong>sugiere la palabra</strong> que cree que quieres poner. Aparece en gris al lado del cursor.</p>
+<table class="st"><tr><td><span class="key">Tab</span></td><td><strong>Aceptar</strong> la sugerencia.</td></tr>
+<tr><td><strong>Seguir escribiendo</strong></td><td>La sugerencia desaparece, no pasa nada.</td></tr>
+<tr><td><span class="key">Esc</span></td><td>Rechazar la sugerencia.</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Consejo</div>Si la palabra sugerida es correcta, pulsa <span class="key">Tab</span> y te ahorras escribir el resto. \u{00A1}Muy c\u{00F3}modo!</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F399}\u{FE0F}</span> Dictado por voz</h2>
+<p class="bx">Puedes <strong>hablarle al Mac</strong> y \u{00E9}l escribe lo que dices. Muy \u{00FA}til si no te gusta el teclado.</p>
+<div class="steps"><div class="step">Haz clic donde quieras escribir.</div>
+<div class="step">Pulsa la tecla <span class="key">fn</span> <strong>dos veces seguidas</strong> (o la tecla del micr\u{00F3}fono \u{1F3A4} si la tienes).</div>
+<div class="step">Aparece un icono de micr\u{00F3}fono. <strong>Habla con claridad</strong>.</div>
+<div class="step">Cuando termines, pulsa <span class="key">fn</span> de nuevo o haz clic en "Listo".</div></div>
+<div class="wrn"><strong>\u{26A0}\u{FE0F} Habla despacio</strong> y claro. Di "punto", "coma" o "signo de interrogaci\u{00F3}n" para esos signos.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4DD}</span> Corrector ortogr\u{00E1}fico</h2>
+<p class="bx">El Mac subraya en rojo las palabras mal escritas. Para corregirlas:</p>
+<div class="steps"><div class="step">Haz clic derecho (2 dedos) sobre la palabra subrayada.</div>
+<div class="step">Elige la correcci\u{00F3}n sugerida de la lista.</div></div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Como el iPhone</div>Funciona igual que la autocorrecci\u{00F3}n del iPhone: te sugiere palabras y corrige errores.</div></div>`},
+
+// ==================== INTERMEDIO ====================
+{id:'in1',title:'Finder: archivos',icon:appIcon('finder'),sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">Finder: tus archivos</h1>
+<p class="lh-d">El Finder es donde encuentras todo lo guardado en tu Mac.</p>
+
+<div class="blk"><h2 class="bt">${AI('finder')} Abrir el Finder</h2>
+<p class="bx">Clic en la <strong>cara sonriente azul</strong> del Dock (siempre el primero a la izquierda).</p>
+<table class="st"><tr><td>\u{1F552} <strong>Recientes</strong></td><td>\u{00DA}ltimos archivos abiertos.</td></tr>
+<tr><td>\u{1F5A5}\u{FE0F} <strong>Escritorio</strong></td><td>Lo del escritorio.</td></tr>
+<tr><td>\u{1F4C2} <strong>Documentos</strong></td><td>Carpeta de documentos.</td></tr>
+<tr><td>\u{2B07}\u{FE0F} <strong>Descargas</strong></td><td>Todo lo descargado de Internet.</td></tr></table>
+<div class="iph"><div class="tip-l">\u{1F4F1} Como la app Archivos</div>El Finder es la versi\u{00F3}n Mac de la app "Archivos" del iPhone.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4C1}</span> Crear carpetas</h2>
+<div class="steps"><div class="step">Abre Finder \u{2192} ve a Documentos.</div>
+<div class="step">Clic derecho (2 dedos) en espacio vac\u{00ED}o.</div>
+<div class="step">Selecciona <strong>"Nueva carpeta"</strong>.</div>
+<div class="step">Escribe nombre y Enter.</div></div>
+<div class="tip"><div class="tip-l">\u{1F4A1} Atajo</div><span class="key">\u{2318}</span>+<span class="key">\u{21E7}</span>+<span class="key">N</span> = nueva carpeta.</div></div>
+
+<div class="blk"><h2 class="bt">${AI('papelera')} Borrar archivos</h2>
+<div class="steps"><div class="step">Clic en el archivo para seleccionarlo.</div>
+<div class="step"><span class="key">\u{2318}</span>+<span class="key">\u{232B}</span> para enviarlo a la Papelera.</div></div>
+<div class="wrn"><strong>\u{26A0}\u{FE0F} Red de seguridad:</strong> La Papelera guarda los archivos borrados. \u{00C1}brela para recuperarlos si te equivocas.</div></div>`},
+
+{id:'in2',title:'Spotlight: buscador',icon:appIcon('spotlight'),sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">Spotlight: busca cualquier cosa</h1>
+<p class="lh-d">La herramienta m\u{00E1}s \u{00FA}til del Mac.</p>
+
+<div class="blk"><h2 class="bt">${AI('spotlight')} Abrir Spotlight</h2>
+<p class="bx">Pulsa <span class="key hl">\u{2318}</span>+<span class="key hl">Espacio</span> en cualquier momento. Aparece la barra de b\u{00FA}squeda:</p>
+<table class="st"><tr><td><strong>Apps</strong></td><td>Escribe "Safari" \u{2192} Enter. Se abre.</td></tr>
+<tr><td><strong>Archivos</strong></td><td>Escribe nombre de documento.</td></tr>
+<tr><td><strong>Calculadora</strong></td><td>"15+27" \u{2192} resultado.</td></tr>
+<tr><td><strong>Tiempo</strong></td><td>"tiempo" \u{2192} previsi\u{00F3}n.</td></tr>
+<tr><td><strong>Definiciones</strong></td><td>Escribe una palabra \u{2192} significado.</td></tr>
+<tr><td><strong>Conversiones</strong></td><td>"20 euros en d\u{00F3}lares".</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Regla de oro</div>Si no sabes d\u{00F3}nde est\u{00E1} algo: <span class="key">\u{2318}</span>+<span class="key">Espacio</span>. \u{00A1}Siempre funciona!</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F9E0}</span> Quiz</h2>
+<div class="ex"><div class="ex-lb">Quiz</div><div class="ex-t">\u{00BF}Qu\u{00E9} atajo abre Spotlight?</div>
+<button class="qo" onclick="qz(this,'w')">A) \u{2318} + F</button>
+<button class="qo" onclick="qz(this,'c')">B) \u{2318} + Espacio</button>
+<button class="qo" onclick="qz(this,'w')">C) \u{2318} + S</button>
+<div class="fb ok" id="fbQ3">\u{1F44F} \u{00A1}Correcto! \u{2318}+Espacio abre Spotlight.</div></div></div>`},
+
+{id:'in3',title:'Correo (Mail)',icon:appIcon('mail'),sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">Correo electr\u{00F3}nico</h1>
+<p class="lh-d">Leer y enviar correos desde el Mac.</p>
+
+<div class="blk"><h2 class="bt">${AI('mail')} Configurar correo</h2>
+<p class="bx">Si usas el mismo Apple ID que el iPhone, el correo ya estar\u{00E1} configurado. Si no:</p>
+<div class="steps"><div class="step">Abre <strong>Mail</strong> en el Dock.</div>
+<div class="step">Te pide tu cuenta (Gmail, Yahoo...).</div>
+<div class="step">Escribe correo y contrase\u{00F1}a.</div>
+<div class="step">\u{00A1}Listo! Los correos aparecen solos.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4E8}</span> Enviar correo</h2>
+<div class="steps"><div class="step">Abre Mail.</div>
+<div class="step"><span class="key">\u{2318}</span>+<span class="key">N</span> para nuevo mensaje.</div>
+<div class="step"><strong>"Para:"</strong> \u{2192} correo del destinatario.</div>
+<div class="step"><strong>"Asunto:"</strong> \u{2192} de qu\u{00E9} va.</div>
+<div class="step">Escribe el mensaje abajo.</div>
+<div class="step">Clic en Enviar (flecha azul).</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4CE}</span> Adjuntar archivo</h2>
+<p class="bx">Clic en el icono del <strong>clip \u{1F4CE}</strong>, busca el archivo, y selecci\u{00F3}nalo. Tambi\u{00E9}n puedes <strong>arrastrar</strong> archivos al correo.</p></div>`},
+
+{id:'ol1',title:'Outlook para Gmail',icon:appIcon('outlook'),sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">Configurar Outlook para tu Gmail</h1>
+<p class="lh-d">Usa Outlook en el Mac para leer y enviar correos de Gmail.</p>
+
+<div class="blk"><h2 class="bt">${AI('outlook')} Descargar Outlook</h2>
+<div class="steps"><div class="step">Abre la <strong>App Store</strong> (busca con Spotlight: <span class="key">\u{2318}</span>+<span class="key">Espacio</span> \u{2192} "App Store").</div>
+<div class="step">En la barra de b\u{00FA}squeda de la App Store, escribe <strong>"Microsoft Outlook"</strong>.</div>
+<div class="step">Haz clic en <strong>"Obtener"</strong> (es gratis).</div>
+<div class="step">Espera a que se descargue e instale.</div>
+<div class="step">Cuando termine, haz clic en <strong>"Abrir"</strong> o b\u{00FA}scalo en el Launchpad.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4E7}</span> Meter tu cuenta de Gmail</h2>
+<div class="steps"><div class="step">Al abrir Outlook por primera vez, te pide una cuenta de correo.</div>
+<div class="step">Escribe tu direcci\u{00F3}n de Gmail (ejemplo: <strong>tunombre@gmail.com</strong>) y pulsa <strong>"Continuar"</strong>.</div>
+<div class="step">Te llevar\u{00E1} a una p\u{00E1}gina de Google. Escribe tu <strong>contrase\u{00F1}a de Gmail</strong>.</div>
+<div class="step">Google te preguntar\u{00E1} si permites que Outlook acceda. Pulsa <strong>"Permitir"</strong>.</div>
+<div class="step">\u{00A1}Listo! Tus correos de Gmail aparecer\u{00E1}n en Outlook.</div></div>
+<div class="wrn"><strong>\u{26A0}\u{FE0F} Verificaci\u{00F3}n en dos pasos:</strong> Si Google te pide un c\u{00F3}digo de verificaci\u{00F3}n, te enviar\u{00E1} un c\u{00F3}digo al m\u{00F3}vil (iPhone). Mira el mensaje que llega y escribe ese n\u{00FA}mero.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4EC}</span> Usar Outlook en el d\u{00ED}a a d\u{00ED}a</h2>
+<table class="st"><tr><td>\u{1F4E9} <strong>Leer correos</strong></td><td>Los nuevos aparecen en <strong>Bandeja de entrada</strong>. Haz clic para abrirlos.</td></tr>
+<tr><td>\u{270F}\u{FE0F} <strong>Nuevo correo</strong></td><td>Clic en <strong>"Nuevo correo"</strong> o <span class="key">\u{2318}</span>+<span class="key">N</span>.</td></tr>
+<tr><td>\u{21A9}\u{FE0F} <strong>Responder</strong></td><td>Abre un correo y pulsa <strong>"Responder"</strong> (flecha) o <span class="key">\u{2318}</span>+<span class="key">R</span>.</td></tr>
+<tr><td>\u{1F4CE} <strong>Adjuntar archivo</strong></td><td>Clic en el <strong>clip \u{1F4CE}</strong> mientras escribes un correo.</td></tr>
+<tr><td>\u{1F50D} <strong>Buscar correos</strong></td><td>Clic en la lupa de arriba o <span class="key">\u{2318}</span>+<span class="key">F</span>.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F504}</span> Diferencias con Mail</h2>
+<table class="st"><tr><td>${AI('mail')} <strong>Mail</strong></td><td>Viene instalado en el Mac. No necesitas descargar nada.</td></tr>
+<tr><td>${AI('outlook')} <strong>Outlook</strong></td><td>Hay que descargarlo de la App Store (gratis).</td></tr>
+<tr><td>\u{2B50} <strong>Prioritarios</strong></td><td>Outlook organiza tus correos en "Prioritarios" y "Otros" autom\u{00E1}ticamente.</td></tr>
+<tr><td>\u{1F4C5} <strong>Calendario</strong></td><td>Outlook tiene calendario integrado dentro de la misma app.</td></tr></table>
+<p class="bx" style="margin-top:16px">Ambos funcionan <strong>igual de bien con Gmail</strong>. Usa el que m\u{00E1}s te guste.</p>
+<div class="iph"><div class="tip-l">\u{1F4F1} Desde el iPhone</div>Si ya usas Outlook en tu iPhone, al iniciar sesi\u{00F3}n con la misma cuenta en el Mac ver\u{00E1}s los mismos correos y carpetas.</div></div>
+
+<div class="tip"><div class="tip-l">\u{1F4A1} Solo una vez</div>Outlook recuerda tu contrase\u{00F1}a. Solo tienes que iniciar sesi\u{00F3}n una vez y despu\u{00E9}s se abre solo con tus correos.</div>`},
+
+{id:'in4',title:'Fotos',icon:appIcon('fotos'),sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">Fotos del iPhone en el Mac</h1>
+<p class="lh-d">Tus fotos se sincronizan autom\u{00E1}ticamente.</p>
+
+<div class="blk"><h2 class="bt">${AI('fotos')} Sincronizaci\u{00F3}n autom\u{00E1}tica</h2>
+<p class="bx">Con el mismo Apple ID, <strong>todas las fotos del iPhone aparecen en el Mac</strong> autom\u{00E1}ticamente. Abre la app Fotos y est\u{00E1}n ah\u{00ED}.</p>
+<div class="iph"><div class="tip-l">\u{1F4F1} Instant\u{00E1}neo</div>Haces foto con iPhone \u{2192} en segundos aparece en el Mac.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F50E}</span> Buscar fotos</h2>
+<table class="st"><tr><td><strong>Personas</strong></td><td>Escribe un nombre.</td></tr>
+<tr><td><strong>Lugares</strong></td><td>"Bilbao" o "playa".</td></tr>
+<tr><td><strong>Cosas</strong></td><td>"perro", "comida", "monta\u{00F1}a".</td></tr>
+<tr><td><strong>Fechas</strong></td><td>"enero 2024" o "navidad".</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F3A8}</span> Editar foto</h2>
+<div class="steps"><div class="step">Doble clic para abrir la foto.</div>
+<div class="step">Clic en <strong>"Editar"</strong>.</div>
+<div class="step">Usa las herramientas (brillo, recortar...).</div>
+<div class="step">Clic en <strong>"OK"</strong>.</div></div>
+<div class="tip"><div class="tip-l">\u{1F4A1} Sin miedo</div>Siempre puedes volver al original con "Revertir al original".</div></div>`},
+
+{id:'ap1',title:'App Store',icon:appIcon('appstore'),sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">La App Store</h1>
+<p class="lh-d">Descarga nuevas aplicaciones para tu Mac.</p>
+
+<div class="blk"><h2 class="bt">${AI('appstore')} \u{00BF}Qu\u{00E9} es la App Store?</h2>
+<p class="bx">Es la <strong>tienda de aplicaciones</strong> del Mac. Aqu\u{00ED} puedes descargar apps nuevas, igual que en tu iPhone.</p>
+<div class="steps"><div class="step">Abre la App Store (<span class="key">\u{2318}</span>+<span class="key">Espacio</span> \u{2192} "App Store").</div>
+<div class="step">Arriba hay una <strong>barra de b\u{00FA}squeda</strong>.</div>
+<div class="step">Escribe el nombre de la app que buscas.</div>
+<div class="step">Clic en <strong>"Obtener"</strong> para descargar (gratis) o en el precio para comprar.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{2B50}</span> Apps gratuitas recomendadas</h2>
+<table class="st"><tr><td>${AI('whatsapp')} <strong>WhatsApp</strong></td><td>Mensajer\u{00ED}a. Habla con familia y amigos.</td></tr>
+<tr><td>${AI('telegram')} <strong>Telegram</strong></td><td>Otra app de mensajes muy popular.</td></tr>
+<tr><td>${AI('vlc')} <strong>VLC</strong></td><td>Reproduce cualquier v\u{00ED}deo.</td></tr>
+<tr><td>${AI('chrome')} <strong>Google Chrome</strong></td><td>Otro navegador de Internet.</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Solo de la App Store</div>Instala apps <strong>solo desde la App Store</strong>. Es la forma m\u{00E1}s segura.</div></div>
+
+<div class="blk"><h2 class="bt">${AI('papelera')} Desinstalar una app</h2>
+<div class="steps"><div class="step">Abre <strong>Finder</strong>.</div>
+<div class="step">Ve a <strong>Aplicaciones</strong> en la barra lateral.</div>
+<div class="step">Arrastra la app a la <strong>Papelera</strong>.</div>
+<div class="step">O haz clic derecho \u{2192} "Trasladar a la papelera".</div></div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Como el iPhone</div>Es la misma App Store que en tu iPhone. Si ya compraste una app en el iPhone, puede estar disponible gratis en el Mac.</div></div>`},
+
+{id:'wa1',title:'WhatsApp en el Mac',icon:appIcon('whatsapp'),sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">WhatsApp en el Mac</h1>
+<p class="lh-d">Usa WhatsApp con la pantalla grande y el teclado.</p>
+
+<div class="blk"><h2 class="bt">${AI('whatsapp')} Instalar WhatsApp</h2>
+<div class="steps"><div class="step">Abre la <strong>App Store</strong>.</div>
+<div class="step">Busca <strong>"WhatsApp"</strong>.</div>
+<div class="step">Clic en <strong>"Obtener"</strong> para descargar.</div>
+<div class="step">Una vez instalado, \u{00E1}brelo desde el Dock o Spotlight.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4F1}</span> Vincular con tu iPhone</h2>
+<p class="bx">WhatsApp del Mac necesita conectarse a tu iPhone la primera vez:</p>
+<div class="steps"><div class="step">Abre WhatsApp en el Mac. Ver\u{00E1}s un <strong>c\u{00F3}digo QR</strong> (un cuadrado con puntitos).</div>
+<div class="step">En tu <strong>iPhone</strong>: abre WhatsApp \u{2192} Ajustes \u{2192} <strong>Dispositivos vinculados</strong>.</div>
+<div class="step">Pulsa <strong>"Vincular un dispositivo"</strong>.</div>
+<div class="step">Apunta la c\u{00E1}mara del iPhone al c\u{00F3}digo QR del Mac.</div>
+<div class="step">\u{00A1}Listo! Tus chats aparecen en el Mac.</div></div>
+<div class="tip"><div class="tip-l">\u{1F4A1} Solo una vez</div>Solo necesitas hacer esto la primera vez. Luego se conecta solo.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{2328}\u{FE0F}</span> Ventajas en el Mac</h2>
+<table class="st"><tr><td>\u{2328}\u{FE0F} <strong>Teclado grande</strong></td><td>Escribe mensajes mucho m\u{00E1}s r\u{00E1}pido y c\u{00F3}modo.</td></tr>
+<tr><td>\u{1F4CE} <strong>Enviar archivos</strong></td><td><strong>Arrastra</strong> fotos o documentos al chat para enviarlos.</td></tr>
+<tr><td>\u{1F4F9} <strong>Videollamadas</strong></td><td>Haz videollamadas en pantalla grande.</td></tr>
+<tr><td>\u{1F50A} <strong>Audios</strong></td><td>Escucha y graba audios c\u{00F3}modamente.</td></tr></table>
+<div class="iph"><div class="tip-l">\u{1F4F1} Todo sincronizado</div>Los mensajes que env\u{00ED}es desde el Mac aparecen en tu iPhone y viceversa. Son los mismos chats.</div></div>`},
+
+{id:'yt1',title:'YouTube y entretenimiento',icon:appIcon('youtube'),sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">YouTube y entretenimiento</h1>
+<p class="lh-d">Ver v\u{00ED}deos, pel\u{00ED}culas y programas en tu Mac.</p>
+
+<div class="blk"><h2 class="bt">${AI('youtube')} Ver YouTube</h2>
+<p class="bx">YouTube es la mayor p\u{00E1}gina de v\u{00ED}deos del mundo. No necesitas instalar nada:</p>
+<div class="steps"><div class="step">Abre <strong>Safari</strong>.</div>
+<div class="step">Escribe <strong>youtube.com</strong> en la barra de arriba y Enter.</div>
+<div class="step">Usa la <strong>lupa de b\u{00FA}squeda</strong> para encontrar v\u{00ED}deos (ej: "recetas de cocina").</div>
+<div class="step">Haz clic en el v\u{00ED}deo para verlo.</div></div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F3AE}</span> Controles del v\u{00ED}deo</h2>
+<table class="st"><tr><td><span class="key">Espacio</span></td><td><strong>Pausa / Reanudar</strong> el v\u{00ED}deo.</td></tr>
+<tr><td><span class="key">\u{2190}</span> / <span class="key">\u{2192}</span></td><td><strong>Retroceder / Avanzar</strong> 5 segundos.</td></tr>
+<tr><td><span class="key">F</span></td><td><strong>Pantalla completa</strong>. Pulsa <span class="key">Esc</span> para salir.</td></tr>
+<tr><td><span class="key">M</span></td><td><strong>Silenciar</strong> / activar sonido.</td></tr>
+<tr><td><span class="key">\u{2191}</span> / <span class="key">\u{2193}</span></td><td><strong>Subir / Bajar volumen</strong>.</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Pantalla grande</div>Pulsa <span class="key">F</span> para ver el v\u{00ED}deo a pantalla completa. \u{00A1}Como un televisor!</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F3AC}</span> M\u{00E1}s entretenimiento</h2>
+<table class="st"><tr><td>\u{1F4FA} <strong>Apple TV+</strong></td><td>Pel\u{00ED}culas y series de Apple. Abre la app <strong>TV</strong>.</td></tr>
+<tr><td>${AI('musica')} <strong>Apple Music</strong></td><td>Escucha m\u{00FA}sica. Abre la app <strong>M\u{00FA}sica</strong>.</td></tr>
+<tr><td>\u{1F4FB} <strong>Podcasts</strong></td><td>Programas de radio. Abre la app <strong>Podcasts</strong>.</td></tr></table>
+<div class="iph"><div class="tip-l">\u{1F4F1} Desde el iPhone</div>Si tienes Apple TV+ o Apple Music en el iPhone, funciona igual en el Mac con tu Apple ID.</div></div>`},
+
+{id:'in5',title:'Videollamadas',icon:appIcon('facetime'),sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">Videollamadas</h1>
+<p class="lh-d">FaceTime y Mensajes directamente desde el Mac.</p>
+
+<div class="blk"><h2 class="bt">${AI('facetime')} FaceTime</h2>
+<div class="steps"><div class="step">Abre <strong>FaceTime</strong> desde el Dock.</div>
+<div class="step">Escribe nombre o n\u{00FA}mero de tel\u{00E9}fono.</div>
+<div class="step">Clic en bot\u{00F3}n verde <strong>\u{1F4F9} V\u{00ED}deo</strong>.</div></div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Truco</div>Si te llaman al iPhone, puedes contestar desde el Mac haciendo clic en la notificaci\u{00F3}n. \u{00A1}Pantalla grande!</div></div>
+
+<div class="blk"><h2 class="bt">${AI('mensajes')} Mensajes</h2>
+<p class="bx">Con el mismo Apple ID, <strong>tus iMessages aparecen en el Mac</strong>. Puedes escribir con el teclado grande.</p>
+<div class="steps"><div class="step">Abre <strong>Mensajes</strong> (bocadillo verde).</div>
+<div class="step">Clic en conversaci\u{00F3}n a la izquierda.</div>
+<div class="step">Escribe abajo y Enter para enviar.</div></div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Todo sincronizado</div>Lo que escribas en el Mac aparece en el iPhone y viceversa.</div></div>`},
+
+{id:'in6',title:'M\u{00E1}s atajos',icon:'\u{2328}\u{FE0F}',sec:'Apps y archivos',lv:'i',
+c:()=>`<div class="lh-b i">\u{1F535} Intermedio</div>
+<h1 class="lh-t">Atajos y trucos extra</h1>
+<p class="lh-d">Atajos que te har\u{00E1}n m\u{00E1}s eficiente.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F504}</span> Cambiar entre apps</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">Tab</span></td><td>Muestra apps abiertas. Mant\u{00E9}n \u{2318} y pulsa Tab para moverte.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4F8}</span> Capturas de pantalla</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">\u{21E7}</span>+<span class="key">3</span></td><td>Captura <strong>toda la pantalla</strong>.</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">\u{21E7}</span>+<span class="key">4</span></td><td>Captura <strong>un trozo</strong> seleccionado.</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">\u{21E7}</span>+<span class="key">5</span></td><td>Abre herramienta de captura completa.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F512}</span> Bloquear pantalla</h2>
+<table class="st"><tr><td><span class="key">\u{2303}</span>+<span class="key">\u{2318}</span>+<span class="key">Q</span></td><td>Bloquea la pantalla. Necesitas contrase\u{00F1}a para volver.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F6A8}</span> App colgada</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">\u{2325}</span>+<span class="key">Esc</span></td><td>"Forzar salida". Selecciona la app atascada y ci\u{00E9}rrala.</td></tr></table>
+<div class="tip"><div class="tip-l">\u{1F4A1} Si TODO se congela</div>Mant\u{00E9}n el bot\u{00F3}n de encendido 10 segundos. Se apaga y puedes reencenderlo.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F5D2}\u{FE0F}</span> Gestos avanzados</h2>
+<table class="st"><tr><td><strong>3 dedos arriba</strong></td><td><strong>Mission Control:</strong> ver todas las ventanas abiertas.</td></tr>
+<tr><td><strong>3 dedos izq/der</strong></td><td>Cambiar entre escritorios.</td></tr>
+<tr><td><strong>Pellizcar 4 dedos</strong></td><td><strong>Launchpad:</strong> todas las apps (como pantalla del iPhone).</td></tr></table></div>`},
+
+// ==================== AVANZADO: IPHONE + MAC ====================
+{id:'ad1',title:'iPhone + Mac',icon:'\u{1F4F1}',sec:'iPhone y Mac',lv:'a',
+c:()=>`<div class="lh-b a">\u{1F7E3} Avanzado</div>
+<h1 class="lh-t">iPhone y Mac juntos</h1>
+<p class="lh-d">Las funciones m\u{00E1}s \u{00FA}tiles cuando usas ambos dispositivos.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4CB}</span> Portapapeles Universal</h2>
+<p class="bx"><strong>Copia en un dispositivo, pega en el otro.</strong> Magia pura:</p>
+<div class="steps"><div class="step">En iPhone: selecciona texto/foto \u{2192} <strong>Copiar</strong>.</div>
+<div class="step">En Mac: <span class="key">\u{2318}</span>+<span class="key">V</span>.</div>
+<div class="step">\u{00A1}Aparece lo del iPhone! Y viceversa.</div></div>
+<div class="tip"><div class="tip-l">\u{1F4A1} Requisito</div>Mismo Apple ID + WiFi + Bluetooth activados en ambos.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4F2}</span> AirDrop</h2>
+<p class="bx"><strong>AirDrop</strong> env\u{00ED}a fotos y archivos entre iPhone y Mac al instante, sin cables ni Internet.</p>
+<h3 style="font-weight:700;margin:16px 0 10px;font-size:21px;color:var(--pri-d)">iPhone \u{2192} Mac:</h3>
+<div class="steps"><div class="step">En iPhone: abre foto/archivo \u{2192} <strong>Compartir</strong> (cuadrado con flecha).</div>
+<div class="step">Arriba aparece tu Mac. T\u{00F3}calo.</div>
+<div class="step">En Mac: el archivo llega a <strong>Descargas</strong>.</div></div>
+<h3 style="font-weight:700;margin:16px 0 10px;font-size:21px;color:var(--pri-d)">Mac \u{2192} iPhone:</h3>
+<div class="steps"><div class="step">Clic derecho sobre archivo \u{2192} <strong>Compartir \u{2192} AirDrop</strong>.</div>
+<div class="step">Elige tu iPhone de la lista.</div>
+<div class="step">En iPhone: Aceptar.</div></div>
+<div class="tip"><div class="tip-l">\u{1F4A1} Para otros tambi\u{00E9}n</div>AirDrop funciona con cualquier iPhone/Mac cercano. Ideal para fotos en familia.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4DE}</span> Llamadas en el Mac</h2>
+<p class="bx">Cuando te llaman al iPhone, <strong>suena tambi\u{00E9}n en el Mac</strong>. Puedes contestar desde aqu\u{00ED} sin tocar el iPhone.</p></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F517}</span> Handoff</h2>
+<p class="bx">Empieza algo en un dispositivo, contin\u{00FA}a en el otro:</p>
+<table class="st"><tr><td>Web en iPhone \u{2192}</td><td>Icono de Safari aparece en el Dock del Mac.</td></tr>
+<tr><td>Correo en Mac \u{2192}</td><td>Icono de Mail abajo en el iPhone.</td></tr>
+<tr><td>Mapa en iPhone \u{2192}</td><td>\u{00C1}brelo en el Mac con pantalla grande.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4F1}</span> iPhone como c\u{00E1}mara web</h2>
+<p class="bx">Tu iPhone tiene mejor c\u{00E1}mara que el Mac. En videollamadas, el Mac puede usar la c\u{00E1}mara del iPhone autom\u{00E1}ticamente si est\u{00E1} cerca.</p></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F9E0}</span> Quiz</h2>
+<div class="ex"><div class="ex-lb">Quiz</div><div class="ex-t">\u{00BF}C\u{00F3}mo se env\u{00ED}an archivos sin cables entre iPhone y Mac?</div>
+<button class="qo" onclick="qz(this,'w')">A) Handoff</button>
+<button class="qo" onclick="qz(this,'c')">B) AirDrop</button>
+<button class="qo" onclick="qz(this,'w')">C) Spotlight</button>
+<div class="fb ok" id="fbQ4">\u{1F44F} \u{00A1}Correcto! AirDrop env\u{00ED}a archivos entre dispositivos Apple.</div></div></div>`},
+
+{id:'ad2',title:'iCloud: la nube',icon:appIcon('icloud'),sec:'iPhone y Mac',lv:'a',
+c:()=>`<div class="lh-b a">\u{1F7E3} Avanzado</div>
+<h1 class="lh-t">iCloud: todo sincronizado</h1>
+<p class="lh-d">Tu almacenamiento en la nube que conecta todos tus dispositivos.</p>
+
+<div class="blk"><h2 class="bt">${AI('icloud')} \u{00BF}Qu\u{00E9} es iCloud?</h2>
+<p class="bx">Una <strong>caja invisible en Internet</strong>. Lo que guardes ah\u{00ED} est\u{00E1} en iPhone y Mac:</p>
+<table class="st"><tr><td>${AI('fotos')} Fotos</td><td>Sincronizadas autom\u{00E1}ticamente.</td></tr>
+<tr><td>\u{1F4D2} Contactos</td><td>Los mismos en ambos.</td></tr>
+<tr><td>${AI('calendario')} Calendario</td><td>Eventos compartidos.</td></tr>
+<tr><td>${AI('notas')} Notas</td><td>Se sincronizan.</td></tr>
+<tr><td>${AI('llavero')} Contrase\u{00F1}as</td><td>Guardadas en ambos.</td></tr>
+<tr><td>${AI('finder')} Archivos</td><td>Carpeta "iCloud Drive" compartida.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt">${AI('icloud')} iCloud Drive</h2>
+<p class="bx">En Finder ver\u{00E1}s <strong>"iCloud Drive"</strong>. Lo que pongas ah\u{00ED} estar\u{00E1} en la app Archivos del iPhone.</p>
+<div class="tip"><div class="tip-l">\u{1F4A1} Seguridad</div>Si el Mac se estropea, tus archivos de iCloud Drive siguen a salvo en la nube.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4CD}</span> Encontrar tu iPhone</h2>
+<div class="steps"><div class="step">Abre <strong>Buscar</strong> (\u{2318}+Espacio \u{2192} "Buscar").</div>
+<div class="step">Ves la ubicaci\u{00F3}n de tu iPhone en un mapa.</div>
+<div class="step">Puedes hacer que <strong>suene</strong>, aunque est\u{00E9} en silencio.</div></div></div>`},
+
+// ==================== AVANZADO: TRUCOS ====================
+{id:'ad3',title:'Siri en el Mac',icon:appIcon('siri'),sec:'Trucos avanzados',lv:'a',
+c:()=>`<div class="lh-b a">\u{1F7E3} Avanzado</div>
+<h1 class="lh-t">Siri: tu asistente</h1>
+<p class="lh-d">Siri tambi\u{00E9}n funciona en el Mac.</p>
+
+<div class="blk"><h2 class="bt">${AI('siri')} Activar Siri</h2>
+<table class="st"><tr><td><strong>"Oye Siri"</strong></td><td>Dilo en voz alta (si est\u{00E1} activado).</td></tr>
+<tr><td><strong>Mantener \u{2318}+Espacio</strong></td><td>Mant\u{00E9}n pulsados varios segundos.</td></tr>
+<tr><td><strong>Icono Siri</strong></td><td>Arriba a la derecha en la barra de men\u{00FA}s.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F4AC}</span> Qu\u{00E9} pedirle</h2>
+<table class="st"><tr><td>"\u{00BF}Qu\u{00E9} tiempo hace?"</td><td>Previsi\u{00F3}n del tiempo.</td></tr>
+<tr><td>"Abre Safari"</td><td>Abre cualquier app.</td></tr>
+<tr><td>"Pon una alarma"</td><td>Alarmas y recordatorios.</td></tr>
+<tr><td>"Llama a [nombre]"</td><td>Llama a trav\u{00E9}s del iPhone.</td></tr>
+<tr><td>"Busca fotos de Bilbao"</td><td>Busca en tu biblioteca.</td></tr></table>
+<div class="iph"><div class="tip-l">\u{1F4F1} Mismo Siri</div>Es el mismo Siri de tu iPhone. Mismas capacidades, pantalla grande.</div></div>`},
+
+{id:'ad4',title:'Seguridad',icon:'\u{1F512}',sec:'Trucos avanzados',lv:'a',
+c:()=>`<div class="lh-b a">\u{1F7E3} Avanzado</div>
+<h1 class="lh-t">Seguridad y protecci\u{00F3}n</h1>
+<p class="lh-d">Consejos importantes para usar el Mac de forma segura.</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F6E1}\u{FE0F}</span> Reglas de oro</h2>
+<table class="st"><tr><td><strong>No compartas tu contrase\u{00F1}a</strong></td><td>Ni Apple ni tu banco te la pedir\u{00E1}n por correo. Si lo hacen, es estafa.</td></tr>
+<tr><td><strong>Emails sospechosos</strong></td><td>Si dice que has ganado algo o urge hacer clic \u{2192} <strong>no lo abras</strong>. Pregunta a alguien de confianza.</td></tr>
+<tr><td><strong>Actualizaciones</strong></td><td>Cuando el Mac avise de actualizaci\u{00F3}n, <strong>di que s\u{00ED}</strong>. Mantiene el Mac seguro.</td></tr>
+<tr><td><strong>Contrase\u{00F1}a fuerte</strong></td><td>Usa una contrase\u{00F1}a que mezcle letras, n\u{00FA}meros y signos.</td></tr></table></div>
+
+<div class="blk"><h2 class="bt">${AI('llavero')} Contrase\u{00F1}as guardadas</h2>
+<p class="bx">El Mac guarda tus contrase\u{00F1}as autom\u{00E1}ticamente con <strong>Llavero de iCloud</strong>. Cuando entras en una web:</p>
+<div class="steps"><div class="step">Safari te pregunta si quieres guardar la contrase\u{00F1}a.</div>
+<div class="step">Di que s\u{00ED}.</div>
+<div class="step">La pr\u{00F3}xima vez se rellenar\u{00E1} sola.</div></div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Sincronizado</div>Las contrase\u{00F1}as guardadas en el Mac tambi\u{00E9}n funcionan en el iPhone y viceversa.</div></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F6E1}\u{FE0F}</span> Cosas que NUNCA debes hacer</h2>
+<table class="st"><tr><td>\u{274C} <strong>Dar tu contrase\u{00F1}a</strong></td><td>Nadie leg\u{00ED}timo te la pedir\u{00E1}.</td></tr>
+<tr><td>\u{274C} <strong>Instalar de sitios raros</strong></td><td>Instala solo desde la App Store o webs oficiales.</td></tr>
+<tr><td>\u{274C} <strong>Clic en enlaces sospechosos</strong></td><td>Si no conoces al remitente, no hagas clic.</td></tr>
+<tr><td>\u{274C} <strong>Compartir Apple ID</strong></td><td>Tu Apple ID es personal. No lo compartas.</td></tr></table></div>`},
+
+{id:'ad5',title:'Notas y Calendario',icon:appIcon('notas'),sec:'Trucos avanzados',lv:'a',
+c:()=>`<div class="lh-b a">\u{1F7E3} Avanzado</div>
+<h1 class="lh-t">Notas y Calendario</h1>
+<p class="lh-d">Dos apps sencillas pero muy \u{00FA}tiles.</p>
+
+<div class="blk"><h2 class="bt">${AI('notas')} Notas</h2>
+<p class="bx">Para escribir cualquier cosa que necesites recordar:</p>
+<div class="steps"><div class="step">Abre <strong>Notas</strong> (en el Dock o \u{2318}+Espacio \u{2192} "Notas").</div>
+<div class="step">Clic en <strong>"Nueva nota"</strong>.</div>
+<div class="step">Escribe lo que quieras.</div>
+<div class="step">Se guarda autom\u{00E1}ticamente.</div></div>
+<div class="iph"><div class="tip-l">\u{1F4F1} Sincronizado</div>Las notas que escribas en el Mac aparecen en tu iPhone y viceversa.</div></div>
+
+<div class="blk"><h2 class="bt">${AI('calendario')} Calendario</h2>
+<p class="bx">Para no olvidar citas y eventos:</p>
+<div class="steps"><div class="step">Abre <strong>Calendario</strong>.</div>
+<div class="step">Haz clic en el d\u{00ED}a del evento.</div>
+<div class="step">Escribe el nombre del evento y la hora.</div>
+<div class="step">Te avisar\u{00E1} cuando llegue el momento.</div></div></div>
+
+<div class="blk"><h2 class="bt">${AI('recordatorios')} Recordatorios</h2>
+<p class="bx">La app <strong>Recordatorios</strong> es para listas de tareas:</p>
+<div class="steps"><div class="step">Abre <strong>Recordatorios</strong>.</div>
+<div class="step">Clic en <strong>"+"</strong> para a\u{00F1}adir tarea.</div>
+<div class="step">Escribe la tarea (ej: "Comprar pan").</div>
+<div class="step">Puedes ponerle fecha y hora para que te avise.</div></div></div>`},
+
+{id:'ad6',title:'Mapas y Tiempo',icon:appIcon('mapas'),sec:'Trucos avanzados',lv:'a',
+c:()=>`<div class="lh-b a">\u{1F7E3} Avanzado</div>
+<h1 class="lh-t">Mapas y el Tiempo</h1>
+<p class="lh-d">Apps del d\u{00ED}a a d\u{00ED}a directamente en pantalla grande.</p>
+
+<div class="blk"><h2 class="bt">${AI('mapas')} Mapas</h2>
+<p class="bx">La app <strong>Mapas</strong> del Mac es la misma que la del iPhone, pero en pantalla grande:</p>
+<table class="st"><tr><td><strong>Buscar sitios</strong></td><td>Escribe direcci\u{00F3}n o nombre de lugar.</td></tr>
+<tr><td><strong>C\u{00F3}mo llegar</strong></td><td>Clic en "C\u{00F3}mo llegar" para ver rutas.</td></tr>
+<tr><td><strong>Enviar al iPhone</strong></td><td>Busca una ruta en el Mac y env\u{00ED}ala al iPhone para seguirla caminando.</td></tr></table>
+<div class="iph"><div class="tip-l">\u{1F4F1} Truco \u{00FA}til</div>Busca la ruta c\u{00F3}modamente en la pantalla grande del Mac y env\u{00ED}ala a tu iPhone antes de salir de casa.</div></div>
+
+<div class="blk"><h2 class="bt">${AI('tiempo')} Tiempo</h2>
+<p class="bx">La app <strong>Tiempo</strong> muestra la previsi\u{00F3}n meteorol\u{00F3}gica con mucho detalle.</p>
+<div class="steps"><div class="step">Abre <strong>Tiempo</strong> (\u{2318}+Espacio \u{2192} "Tiempo").</div>
+<div class="step">Ver\u{00E1}s la previsi\u{00F3}n de tu ciudad.</div>
+<div class="step">Puedes a\u{00F1}adir otras ciudades buscando por nombre.</div></div></div>`},
+
+// ==================== REFERENCIA RÁPIDA ====================
+{id:'ref',title:'Referencia r\u{00E1}pida',icon:'\u{1F4CB}',sec:'Final',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F4CB} Referencia</div>
+<h1 class="lh-t">Referencia r\u{00E1}pida</h1>
+<p class="lh-d">Todos los atajos y trucos en una sola p\u{00E1}gina. \u{00A1}Gu\u{00E1}rdala como favorita!</p>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{2328}\u{FE0F}</span> Atajos b\u{00E1}sicos</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">C</span></td><td>Copiar</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">V</span></td><td>Pegar</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">X</span></td><td>Cortar</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">Z</span></td><td>Deshacer</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">A</span></td><td>Seleccionar todo</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">S</span></td><td>Guardar</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">P</span></td><td>Imprimir</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">F</span></td><td>Buscar en p\u{00E1}gina</td></tr></table></div>
+
+<div class="blk"><h2 class="bt">${AI('safari')} Safari</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">T</span></td><td>Nueva pesta\u{00F1}a</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">W</span></td><td>Cerrar pesta\u{00F1}a</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">L</span></td><td>Ir a la barra de direcci\u{00F3}n</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">D</span></td><td>A\u{00F1}adir favorito</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">+</span></td><td>Texto m\u{00E1}s grande</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">\u{2212}</span></td><td>Texto m\u{00E1}s peque\u{00F1}o</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">0</span></td><td>Tama\u{00F1}o normal</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{2699}\u{FE0F}</span> Sistema</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">Espacio</span></td><td>Abrir Spotlight (buscar cualquier cosa)</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">Tab</span></td><td>Cambiar entre apps</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">Q</span></td><td>Cerrar app</td></tr>
+<tr><td><span class="key">\u{2303}</span>+<span class="key">\u{2318}</span>+<span class="key">Q</span></td><td>Bloquear pantalla</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">\u{2325}</span>+<span class="key">Esc</span></td><td>Forzar salida de app</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">\u{21E7}</span>+<span class="key">3</span></td><td>Captura de pantalla</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">\u{21E7}</span>+<span class="key">4</span></td><td>Captura de un trozo</td></tr>
+<tr><td><span class="key">fn</span>+<span class="key">fn</span></td><td>Activar dictado por voz</td></tr></table></div>
+
+<div class="blk"><h2 class="bt">${AI('finder')} Finder</h2>
+<table class="st"><tr><td><span class="key">\u{2318}</span>+<span class="key">\u{21E7}</span>+<span class="key">N</span></td><td>Nueva carpeta</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">\u{232B}</span></td><td>Mover a la papelera</td></tr>
+<tr><td><span class="key">\u{2318}</span>+<span class="key">N</span></td><td>Nueva ventana de Finder</td></tr>
+<tr><td><span class="key">Espacio</span></td><td>Vista r\u{00E1}pida (previsualizar archivo)</td></tr></table></div>
+
+<div class="blk"><h2 class="bt"><span class="ic">\u{1F590}</span> Trackpad</h2>
+<table class="st"><tr><td><strong>1 dedo: mover</strong></td><td>Mueve el cursor por la pantalla.</td></tr>
+<tr><td><strong>1 toque</strong></td><td>Clic (seleccionar / abrir).</td></tr>
+<tr><td><strong>2 toques</strong></td><td>Clic derecho (men\u{00FA} de opciones).</td></tr>
+<tr><td><strong>2 dedos arr/abj</strong></td><td>Scroll (subir/bajar p\u{00E1}gina).</td></tr>
+<tr><td><strong>Separar 2 dedos</strong></td><td>Zoom (ampliar).</td></tr>
+<tr><td><strong>Juntar 2 dedos</strong></td><td>Zoom (reducir).</td></tr>
+<tr><td><strong>3 dedos arriba</strong></td><td>Mission Control (ver ventanas).</td></tr>
+<tr><td><strong>3 dedos izq/der</strong></td><td>Cambiar escritorio.</td></tr></table></div>
+
+<div class="tip"><div class="tip-l">\u{1F4A1} Imprime esta p\u{00E1}gina</div>Pulsa <span class="key">\u{2318}</span>+<span class="key">P</span> para imprimir esta referencia y tenerla al lado del Mac.</div>`},
+
+// ==================== EXAMEN FINAL ====================
+{id:'exam',title:'Examen Final',icon:'\u{1F4DD}',sec:'Examen Final',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F4DD} Examen</div>
+<h1 class="lh-t">Examen Final \u{2014} \u{00BF}Cu\u{00E1}nto has aprendido?</h1>
+<p class="lh-d">50 preguntas en 5 bloques. \u{00A1}T\u{00FA} puedes!</p>
+<div style="background:linear-gradient(135deg,var(--ok-l),#A7F3D0);border-radius:var(--r);padding:24px 32px;margin:32px 0 20px;text-align:center;border:2px solid var(--ok)"><div style="font-size:36px;margin-bottom:8px">⌨️</div><div style="font-family:'Quicksand',sans-serif;font-weight:900;font-size:22px;color:var(--pri-d);text-transform:uppercase;letter-spacing:1.5px">BLOQUE 1: EL TECLADO</div><div style="font-size:16px;color:var(--txt-l);font-weight:600;margin-top:4px">10 preguntas</div></div>
+<div class="blk"><h2 class="bt">Pregunta 1 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué teclas usas para COPIAR un texto?</strong></p>
+<button class="qo" onclick="exQ(this,'w',1,'kb3')">A) <span class="key">⌘</span>+<span class="key">V</span></button>
+<button class="qo" onclick="exQ(this,'c',1,'kb3')">B) <span class="key">⌘</span>+<span class="key">C</span></button>
+<button class="qo" onclick="exQ(this,'w',1,'kb3')">C) <span class="key">⌘</span>+<span class="key">X</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+C = Copiar</div></div>
+<div class="blk"><h2 class="bt">Pregunta 2 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>Si te equivocas y quieres DESHACER lo último que hiciste, pulsas...</strong></p>
+<button class="qo" onclick="exQ(this,'c',2,'kb3')">A) <span class="key">⌘</span>+<span class="key">Z</span></button>
+<button class="qo" onclick="exQ(this,'w',2,'kb3')">B) <span class="key">⌘</span>+<span class="key">X</span></button>
+<button class="qo" onclick="exQ(this,'w',2,'kb3')">C) <span class="key">⌘</span>+<span class="key">D</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+Z = Deshacer</div></div>
+<div class="blk"><h2 class="bt">Pregunta 3 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué tecla mantienes pulsada para escribir en MAYÚSCULAS?</strong></p>
+<button class="qo" onclick="exQ(this,'c',3,'kb1')">A) <span class="key">Shift</span> (⇧)</button>
+<button class="qo" onclick="exQ(this,'w',3,'kb1')">B) <span class="key">⌘</span> (Cmd)</button>
+<button class="qo" onclick="exQ(this,'w',3,'kb1')">C) <span class="key">Fn</span></button>
+<button class="qo" onclick="exQ(this,'w',3,'kb1')">D) <span class="key">Option</span> (⌥)</button>
+<div class="fb ok">✅ ¡Correcto! Shift = mayúsculas</div></div>
+<div class="blk"><h2 class="bt">Pregunta 4 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo escribes el símbolo @ en el Mac?</strong></p>
+<button class="qo" onclick="exQ(this,'c',4,'kb1')">A) <span class="key">⌥</span>+<span class="key">2</span> (Option+2)</button>
+<button class="qo" onclick="exQ(this,'w',4,'kb1')">B) <span class="key">⌘</span>+<span class="key">@</span></button>
+<button class="qo" onclick="exQ(this,'w',4,'kb1')">C) <span class="key">⇧</span>+<span class="key">2</span> (Shift+2)</button>
+<button class="qo" onclick="exQ(this,'w',4,'kb1')">D) <span class="key">Alt</span>+<span class="key">A</span></button>
+<div class="fb ok">✅ ¡Correcto! Option + 2 = @</div></div>
+<div class="blk"><h2 class="bt">Pregunta 5 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué atajo SELECCIONA TODO el texto?</strong></p>
+<button class="qo" onclick="exQ(this,'c',5,'kb3')">A) <span class="key">⌘</span>+<span class="key">A</span></button>
+<button class="qo" onclick="exQ(this,'w',5,'kb3')">B) <span class="key">⌘</span>+<span class="key">S</span></button>
+<button class="qo" onclick="exQ(this,'w',5,'kb3')">C) <span class="key">⌘</span>+<span class="key">E</span></button>
+<button class="qo" onclick="exQ(this,'w',5,'kb3')">D) <span class="key">⌘</span>+<span class="key">T</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+A = Seleccionar todo</div></div>
+<div class="blk"><h2 class="bt">Pregunta 6 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué atajo GUARDA un documento?</strong></p>
+<button class="qo" onclick="exQ(this,'w',6,'kb3')">A) <span class="key">⌘</span>+<span class="key">G</span></button>
+<button class="qo" onclick="exQ(this,'c',6,'kb3')">B) <span class="key">⌘</span>+<span class="key">S</span></button>
+<button class="qo" onclick="exQ(this,'w',6,'kb3')">C) <span class="key">⌘</span>+<span class="key">D</span></button>
+<button class="qo" onclick="exQ(this,'w',6,'kb3')">D) <span class="key">⌘</span>+<span class="key">P</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+S = Guardar (Save)</div></div>
+<div class="blk"><h2 class="bt">Pregunta 7 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué atajo IMPRIME un documento?</strong></p>
+<button class="qo" onclick="exQ(this,'w',7,'kb3')">A) <span class="key">⌘</span>+<span class="key">I</span></button>
+<button class="qo" onclick="exQ(this,'w',7,'kb3')">B) <span class="key">⌘</span>+<span class="key">S</span></button>
+<button class="qo" onclick="exQ(this,'c',7,'kb3')">C) <span class="key">⌘</span>+<span class="key">P</span></button>
+<button class="qo" onclick="exQ(this,'w',7,'kb3')">D) <span class="key">⌘</span>+<span class="key">L</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+P = Imprimir (Print)</div></div>
+<div class="ex"><div class="ex-lb">Pregunta 8 de 50</div>
+<div class="ex-t">✍️ Escribe un email breve a tu nieto diciéndole que ya sabes usar el Mac</div>
+<div class="ex-i">No tiene que ser perfecto — solo practica escribir.</div>
+<textarea id="exEmail" class="ti" rows="4" style="max-width:480px;width:100%;text-align:left;font-size:20px;resize:vertical" placeholder="Querido nieto..."></textarea>
+<br><br>
+<button class="btn btn-p" onclick="exEmailSend()">✉️ Enviar respuesta</button>
+<button class="btn btn-o" onclick="exSkip(8,'kb2')" style="margin-left:12px">Saltar pregunta</button>
+<div id="fbExEmail" class="fb ok" style="justify-content:center">✅ ¡Muy bien escrito! Ya dominas el teclado</div></div>
+<div class="blk"><h2 class="bt">Pregunta 9 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo escribes el símbolo € (euro)?</strong></p>
+<button class="qo" onclick="exQ(this,'w',9,'kb1')">A) <span class="key">⇧</span>+<span class="key">E</span> (Shift+E)</button>
+<button class="qo" onclick="exQ(this,'w',9,'kb1')">B) <span class="key">⌘</span>+<span class="key">3</span> (Cmd+3)</button>
+<button class="qo" onclick="exQ(this,'c',9,'kb1')">C) <span class="key">⌥</span>+<span class="key">3</span> (Option+3)</button>
+<button class="qo" onclick="exQ(this,'w',9,'kb1')">D) <span class="key">⌥</span>+<span class="key">E</span> (Option+E)</button>
+<div class="fb ok">✅ ¡Correcto! Option + 3 = €</div></div>
+<div class="blk"><h2 class="bt">Pregunta 10 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué atajo BUSCA una palabra en la página?</strong></p>
+<button class="qo" onclick="exQ(this,'w',10,'kb3')">A) <span class="key">⌘</span>+<span class="key">B</span></button>
+<button class="qo" onclick="exQ(this,'c',10,'kb3')">B) <span class="key">⌘</span>+<span class="key">F</span></button>
+<button class="qo" onclick="exQ(this,'w',10,'kb3')">C) <span class="key">⌘</span>+<span class="key">S</span></button>
+<button class="qo" onclick="exQ(this,'w',10,'kb3')">D) <span class="key">⌘</span>+<span class="key">W</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+F = Buscar (Find)</div></div>
+
+<div style="background:linear-gradient(135deg,var(--blu-l),#93C5FD);border-radius:var(--r);padding:24px 32px;margin:32px 0 20px;text-align:center;border:2px solid var(--blu)"><div style="font-size:36px;margin-bottom:8px">🖱️</div><div style="font-family:'Quicksand',sans-serif;font-weight:900;font-size:22px;color:var(--blu);text-transform:uppercase;letter-spacing:1.5px">BLOQUE 2: EL TRACKPAD</div><div style="font-size:16px;color:var(--txt-l);font-weight:600;margin-top:4px">10 preguntas</div></div>
+<div class="blk"><h2 class="bt">Pregunta 11 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>Para hacer "clic derecho" en el trackpad, ¿qué haces?</strong></p>
+<button class="qo" onclick="exQ(this,'c',11,'tp2')">A) Pulsar con dos dedos</button>
+<button class="qo" onclick="exQ(this,'w',11,'tp2')">B) Hacer doble clic</button>
+<button class="qo" onclick="exQ(this,'w',11,'tp2')">C) Pulsar fuerte</button>
+<div class="fb ok">✅ ¡Correcto! Dos dedos = clic derecho</div></div>
+<div class="blk"><h2 class="bt">Pregunta 12 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cuántos dedos usas para hacer zoom?</strong></p>
+<button class="qo" onclick="exQ(this,'w',12,'tp2')">A) 1 dedo</button>
+<button class="qo" onclick="exQ(this,'c',12,'tp2')">B) 2 dedos (separar/juntar)</button>
+<button class="qo" onclick="exQ(this,'w',12,'tp2')">C) 3 dedos</button>
+<button class="qo" onclick="exQ(this,'w',12,'tp2')">D) 4 dedos</button>
+<div class="fb ok">✅ ¡Correcto! Zoom = separar o juntar 2 dedos</div></div>
+<div class="blk"><h2 class="bt">Pregunta 13 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo abres el Launchpad con el trackpad?</strong></p>
+<button class="qo" onclick="exQ(this,'c',13,'tp2')">A) Pellizcar con 4 dedos</button>
+<button class="qo" onclick="exQ(this,'w',13,'tp2')">B) 3 dedos hacia arriba</button>
+<button class="qo" onclick="exQ(this,'w',13,'tp2')">C) 2 dedos</button>
+<button class="qo" onclick="exQ(this,'w',13,'tp2')">D) Doble clic</button>
+<div class="fb ok">✅ ¡Correcto! Pellizcar 4 dedos = Launchpad</div></div>
+<div class="blk"><h2 class="bt">Pregunta 14 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué gesto abre Mission Control?</strong></p>
+<button class="qo" onclick="exQ(this,'w',14,'tp2')">A) 2 dedos hacia arriba</button>
+<button class="qo" onclick="exQ(this,'c',14,'tp2')">B) 3 dedos hacia arriba</button>
+<button class="qo" onclick="exQ(this,'w',14,'tp2')">C) Pellizcar</button>
+<button class="qo" onclick="exQ(this,'w',14,'tp2')">D) Doble toque</button>
+<div class="fb ok">✅ ¡Correcto! 3 dedos arriba = Mission Control</div></div>
+<div class="blk"><h2 class="bt">Pregunta 15 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo vas "Atrás" en Safari con el trackpad?</strong></p>
+<button class="qo" onclick="exQ(this,'w',15,'tp2')">A) 1 dedo a la derecha</button>
+<button class="qo" onclick="exQ(this,'c',15,'tp2')">B) 2 dedos hacia la derecha</button>
+<button class="qo" onclick="exQ(this,'w',15,'tp2')">C) 3 dedos</button>
+<button class="qo" onclick="exQ(this,'w',15,'tp2')">D) Pellizcar</button>
+<div class="fb ok">✅ ¡Correcto! 2 dedos a la derecha = Atrás</div></div>
+<div class="blk"><h2 class="bt">Pregunta 16 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Para qué sirve el doble clic?</strong></p>
+<button class="qo" onclick="exQ(this,'w',16,'tp1')">A) Cerrar ventana</button>
+<button class="qo" onclick="exQ(this,'c',16,'tp1')">B) Abrir archivos o seleccionar una palabra</button>
+<button class="qo" onclick="exQ(this,'w',16,'tp1')">C) Borrar</button>
+<button class="qo" onclick="exQ(this,'w',16,'tp1')">D) Hacer zoom</button>
+<div class="fb ok">✅ ¡Correcto! Doble clic = abrir o seleccionar palabra</div></div>
+<div class="blk"><h2 class="bt">Pregunta 17 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo se mueve el cursor por la pantalla?</strong></p>
+<button class="qo" onclick="exQ(this,'w',17,'tp1')">A) Presionar fuerte el trackpad</button>
+<button class="qo" onclick="exQ(this,'c',17,'tp1')">B) Deslizar 1 dedo</button>
+<button class="qo" onclick="exQ(this,'w',17,'tp1')">C) 2 dedos</button>
+<button class="qo" onclick="exQ(this,'w',17,'tp1')">D) Soplar en el trackpad</button>
+<div class="fb ok">✅ ¡Correcto! 1 dedo = mover el cursor</div></div>
+<div class="blk"><h2 class="bt">Pregunta 18 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué gesto sirve para cambiar entre escritorios?</strong></p>
+<button class="qo" onclick="exQ(this,'w',18,'tp2')">A) 2 dedos izquierda/derecha</button>
+<button class="qo" onclick="exQ(this,'c',18,'tp2')">B) 3 dedos izquierda/derecha</button>
+<button class="qo" onclick="exQ(this,'w',18,'tp2')">C) Pellizcar</button>
+<button class="qo" onclick="exQ(this,'w',18,'tp2')">D) Tocar 3 veces</button>
+<div class="fb ok">✅ ¡Correcto! 3 dedos horizontal = cambiar escritorio</div></div>
+<div class="blk"><h2 class="bt">Pregunta 19 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué haces si quieres ampliar una página?</strong></p>
+<button class="qo" onclick="exQ(this,'w',19,'tp2')">A) Juntar 2 dedos</button>
+<button class="qo" onclick="exQ(this,'c',19,'tp2')">B) Separar 2 dedos</button>
+<button class="qo" onclick="exQ(this,'w',19,'tp2')">C) 3 dedos hacia arriba</button>
+<button class="qo" onclick="exQ(this,'w',19,'tp2')">D) Doble clic</button>
+<div class="fb ok">✅ ¡Correcto! Separar 2 dedos = ampliar</div></div>
+<div class="blk"><h2 class="bt">Pregunta 20 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo haces scroll (desplazar la página)?</strong></p>
+<button class="qo" onclick="exQ(this,'w',20,'tp1')">A) Presionar y arrastrar</button>
+<button class="qo" onclick="exQ(this,'c',20,'tp1')">B) 2 dedos hacia arriba/abajo</button>
+<button class="qo" onclick="exQ(this,'w',20,'tp1')">C) 3 dedos</button>
+<button class="qo" onclick="exQ(this,'w',20,'tp1')">D) Girar 2 dedos</button>
+<div class="fb ok">✅ ¡Correcto! 2 dedos arriba/abajo = scroll</div></div>
+
+<div style="background:linear-gradient(135deg,var(--pur-l),#C4B5FD);border-radius:var(--r);padding:24px 32px;margin:32px 0 20px;text-align:center;border:2px solid var(--pur)"><div style="font-size:36px;margin-bottom:8px">🖥️</div><div style="font-family:'Quicksand',sans-serif;font-weight:900;font-size:22px;color:var(--pur);text-transform:uppercase;letter-spacing:1.5px">BLOQUE 3: SOFTWARE BÁSICO</div><div style="font-size:16px;color:var(--txt-l);font-weight:600;margin-top:4px">10 preguntas</div></div>
+<div class="blk"><h2 class="bt">Pregunta 21 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>El puntito debajo de un icono del Dock significa...</strong></p>
+<button class="qo" onclick="exQ(this,'w',21,'sw1')">A) Que la app está rota</button>
+<button class="qo" onclick="exQ(this,'c',21,'sw1')">B) Que la app está abierta</button>
+<button class="qo" onclick="exQ(this,'w',21,'sw1')">C) Que hay una actualización</button>
+<div class="fb ok">✅ ¡Correcto! El puntito = app abierta</div></div>
+<div class="blk"><h2 class="bt">Pregunta 22 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>En Safari, ¿qué atajo abre una nueva pestaña?</strong></p>
+<button class="qo" onclick="exQ(this,'w',22,'sw2')">A) <span class="key">⌘</span>+<span class="key">N</span></button>
+<button class="qo" onclick="exQ(this,'c',22,'sw2')">B) <span class="key">⌘</span>+<span class="key">T</span></button>
+<button class="qo" onclick="exQ(this,'w',22,'sw2')">C) <span class="key">⌘</span>+<span class="key">P</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+T = nueva pestaña</div></div>
+<div class="blk"><h2 class="bt">Pregunta 23 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Dónde se apaga el Mac?</strong></p>
+<button class="qo" onclick="exQ(this,'c',23,'sw1')">A) Menú 🍎 → Apagar</button>
+<button class="qo" onclick="exQ(this,'w',23,'sw1')">B) Botón X rojo de la ventana</button>
+<button class="qo" onclick="exQ(this,'w',23,'sw1')">C) Desenchufar el cable</button>
+<button class="qo" onclick="exQ(this,'w',23,'sw1')">D) <span class="key">⌘</span>+<span class="key">Q</span></button>
+<div class="fb ok">✅ ¡Correcto! Menú Apple (🍎) → Apagar</div></div>
+<div class="blk"><h2 class="bt">Pregunta 24 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué botón de la ventana es CERRAR?</strong></p>
+<button class="qo" onclick="exQ(this,'c',24,'sw1')">A) 🔴 Rojo</button>
+<button class="qo" onclick="exQ(this,'w',24,'sw1')">B) 🟢 Verde</button>
+<button class="qo" onclick="exQ(this,'w',24,'sw1')">C) 🟡 Amarillo</button>
+<button class="qo" onclick="exQ(this,'w',24,'sw1')">D) 🔵 Azul</button>
+<div class="fb ok">✅ ¡Correcto! Rojo = cerrar la ventana</div></div>
+<div class="blk"><h2 class="bt">Pregunta 25 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué botón pone la ventana en PANTALLA COMPLETA?</strong></p>
+<button class="qo" onclick="exQ(this,'w',25,'sw1')">A) 🔴 Rojo</button>
+<button class="qo" onclick="exQ(this,'c',25,'sw1')">B) 🟢 Verde</button>
+<button class="qo" onclick="exQ(this,'w',25,'sw1')">C) 🟡 Amarillo</button>
+<button class="qo" onclick="exQ(this,'w',25,'sw1')">D) 🔵 Azul</button>
+<div class="fb ok">✅ ¡Correcto! Verde = pantalla completa</div></div>
+<div class="blk"><h2 class="bt">Pregunta 26 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo haces la LETRA MÁS GRANDE en Safari?</strong></p>
+<button class="qo" onclick="exQ(this,'c',26,'sw2')">A) <span class="key">⌘</span> y <span class="key">+</span></button>
+<button class="qo" onclick="exQ(this,'w',26,'sw2')">B) <span class="key">⌘</span> y <span class="key">−</span></button>
+<button class="qo" onclick="exQ(this,'w',26,'sw2')">C) <span class="key">F12</span></button>
+<button class="qo" onclick="exQ(this,'w',26,'sw2')">D) <span class="key">⌘</span>+<span class="key">Z</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘ y + = letra más grande</div></div>
+<div class="blk"><h2 class="bt">Pregunta 27 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Dónde ajustas el tamaño del cursor para verlo mejor?</strong></p>
+<button class="qo" onclick="exQ(this,'c',27,'sw4')">A) Ajustes → Accesibilidad → Pantalla</button>
+<button class="qo" onclick="exQ(this,'w',27,'sw4')">B) Safari → Preferencias</button>
+<button class="qo" onclick="exQ(this,'w',27,'sw4')">C) Finder → Opciones</button>
+<button class="qo" onclick="exQ(this,'w',27,'sw4')">D) En el Dock</button>
+<div class="fb ok">✅ ¡Correcto! Ajustes → Accesibilidad → Pantalla</div></div>
+<div class="blk"><h2 class="bt">Pregunta 28 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo abres Spotlight para buscar cualquier cosa?</strong></p>
+<button class="qo" onclick="exQ(this,'w',28,'in2')">A) <span class="key">⌘</span>+<span class="key">S</span></button>
+<button class="qo" onclick="exQ(this,'c',28,'in2')">B) <span class="key">⌘</span>+<span class="key">Espacio</span></button>
+<button class="qo" onclick="exQ(this,'w',28,'in2')">C) <span class="key">⌘</span>+<span class="key">F</span></button>
+<button class="qo" onclick="exQ(this,'w',28,'in2')">D) <span class="key">F1</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+Espacio = Spotlight</div></div>
+<div class="blk"><h2 class="bt">Pregunta 29 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué app usas para ver tus archivos y carpetas?</strong></p>
+<button class="qo" onclick="exQ(this,'w',29,'in1')">A) ${AI('safari')} Safari</button>
+<button class="qo" onclick="exQ(this,'c',29,'in1')">B) ${AI('finder')} Finder</button>
+<button class="qo" onclick="exQ(this,'w',29,'in1')">C) ${AI('mail')} Mail</button>
+<button class="qo" onclick="exQ(this,'w',29,'in1')">D) ${AI('notas')} Notas</button>
+<div class="fb ok">✅ ¡Correcto! Finder = tus archivos</div></div>
+<div class="blk"><h2 class="bt">Pregunta 30 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo dictas texto con tu voz en el Mac?</strong></p>
+<button class="qo" onclick="exQ(this,'c',30,'sw3')">A) Pulsar <span class="key">Fn</span> dos veces</button>
+<button class="qo" onclick="exQ(this,'w',30,'sw3')">B) <span class="key">⌘</span>+<span class="key">D</span></button>
+<button class="qo" onclick="exQ(this,'w',30,'sw3')">C) Decir "Dictar" en voz alta</button>
+<button class="qo" onclick="exQ(this,'w',30,'sw3')">D) <span class="key">Ctrl</span>+<span class="key">V</span></button>
+<div class="fb ok">✅ ¡Correcto! Fn + Fn = activar dictado</div></div>
+
+<div style="background:linear-gradient(135deg,var(--acc-l),#FEB273);border-radius:var(--r);padding:24px 32px;margin:32px 0 20px;text-align:center;border:2px solid var(--acc)"><div style="font-size:36px;margin-bottom:8px">📧</div><div style="font-family:'Quicksand',sans-serif;font-weight:900;font-size:22px;color:var(--acc);text-transform:uppercase;letter-spacing:1.5px">BLOQUE 4: APPS Y CORREO</div><div style="font-size:16px;color:var(--txt-l);font-weight:600;margin-top:4px">10 preguntas</div></div>
+<div class="blk"><h2 class="bt">Pregunta 31 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo conectas WhatsApp en el Mac?</strong></p>
+<button class="qo" onclick="exQ(this,'w',31,'wa1')">A) Descargas una app especial de pago</button>
+<button class="qo" onclick="exQ(this,'c',31,'wa1')">B) Escaneas un código QR con el móvil</button>
+<button class="qo" onclick="exQ(this,'w',31,'wa1')">C) Metes tu número de teléfono en Safari</button>
+<div class="fb ok">✅ ¡Correcto! Escaneas el QR y listo</div></div>
+<div class="blk"><h2 class="bt">Pregunta 32 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo creas un nuevo correo en Outlook?</strong></p>
+<button class="qo" onclick="exQ(this,'w',32,'ol1')">A) <span class="key">⌘</span>+<span class="key">M</span></button>
+<button class="qo" onclick="exQ(this,'c',32,'ol1')">B) <span class="key">⌘</span>+<span class="key">N</span></button>
+<button class="qo" onclick="exQ(this,'w',32,'ol1')">C) <span class="key">⌘</span>+<span class="key">C</span></button>
+<button class="qo" onclick="exQ(this,'w',32,'ol1')">D) <span class="key">⌘</span>+<span class="key">E</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+N = Nuevo correo</div></div>
+<div class="blk"><h2 class="bt">Pregunta 33 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo adjuntas un archivo a un correo?</strong></p>
+<button class="qo" onclick="exQ(this,'w',33,'in3')">A) <span class="key">⌘</span>+<span class="key">A</span></button>
+<button class="qo" onclick="exQ(this,'c',33,'in3')">B) Clic en el clip 📎</button>
+<button class="qo" onclick="exQ(this,'w',33,'in3')">C) Arrastrar al Dock</button>
+<button class="qo" onclick="exQ(this,'w',33,'in3')">D) <span class="key">⌘</span>+<span class="key">F</span></button>
+<div class="fb ok">✅ ¡Correcto! Clip 📎 = adjuntar archivo</div></div>
+<div class="blk"><h2 class="bt">Pregunta 34 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Dónde van los archivos que descargas de Internet?</strong></p>
+<button class="qo" onclick="exQ(this,'w',34,'in1')">A) Escritorio</button>
+<button class="qo" onclick="exQ(this,'c',34,'in1')">B) Carpeta Descargas</button>
+<button class="qo" onclick="exQ(this,'w',34,'in1')">C) Papelera</button>
+<button class="qo" onclick="exQ(this,'w',34,'in1')">D) iCloud</button>
+<div class="fb ok">✅ ¡Correcto! Descargas = carpeta Descargas</div></div>
+<div class="blk"><h2 class="bt">Pregunta 35 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo borras un archivo?</strong></p>
+<button class="qo" onclick="exQ(this,'w',35,'in1')">A) <span class="key">⌘</span>+<span class="key">D</span></button>
+<button class="qo" onclick="exQ(this,'c',35,'in1')">B) <span class="key">⌘</span>+<span class="key">⌫</span> (Suprimir)</button>
+<button class="qo" onclick="exQ(this,'w',35,'in1')">C) Clic derecho → Cerrar</button>
+<button class="qo" onclick="exQ(this,'w',35,'in1')">D) <span class="key">⌘</span>+<span class="key">X</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+Suprimir = enviar a Papelera</div></div>
+<div class="blk"><h2 class="bt">Pregunta 36 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo creas una carpeta nueva en Finder?</strong></p>
+<button class="qo" onclick="exQ(this,'w',36,'in1')">A) <span class="key">⌘</span>+<span class="key">N</span></button>
+<button class="qo" onclick="exQ(this,'c',36,'in1')">B) <span class="key">⌘</span>+<span class="key">⇧</span>+<span class="key">N</span></button>
+<button class="qo" onclick="exQ(this,'w',36,'in1')">C) <span class="key">⌘</span>+<span class="key">F</span></button>
+<button class="qo" onclick="exQ(this,'w',36,'in1')">D) Clic derecho → Copiar</button>
+<div class="fb ok">✅ ¡Correcto! ⌘+⇧+N = Nueva carpeta</div></div>
+<div class="blk"><h2 class="bt">Pregunta 37 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo buscas una foto de Bilbao en la app Fotos?</strong></p>
+<button class="qo" onclick="exQ(this,'w',37,'in4')">A) Buscar por fecha</button>
+<button class="qo" onclick="exQ(this,'c',37,'in4')">B) Escribir "Bilbao" en el buscador</button>
+<button class="qo" onclick="exQ(this,'w',37,'in4')">C) Abrir Safari</button>
+<button class="qo" onclick="exQ(this,'w',37,'in4')">D) Preguntar a Siri</button>
+<div class="fb ok">✅ ¡Correcto! El buscador de Fotos busca por lugar</div></div>
+<div class="blk"><h2 class="bt">Pregunta 38 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Para pausar un vídeo en YouTube qué tecla pulsas?</strong></p>
+<button class="qo" onclick="exQ(this,'w',38,'yt1')">A) <span class="key">Enter</span></button>
+<button class="qo" onclick="exQ(this,'c',38,'yt1')">B) <span class="key">Espacio</span></button>
+<button class="qo" onclick="exQ(this,'w',38,'yt1')">C) <span class="key">Esc</span></button>
+<button class="qo" onclick="exQ(this,'w',38,'yt1')">D) <span class="key">Tab</span></button>
+<div class="fb ok">✅ ¡Correcto! Espacio = pausar/reproducir</div></div>
+<div class="blk"><h2 class="bt">Pregunta 39 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo capturas TODA la pantalla?</strong></p>
+<button class="qo" onclick="exQ(this,'w',39,'ad5')">A) <span class="key">⌘</span>+<span class="key">⇧</span>+<span class="key">4</span></button>
+<button class="qo" onclick="exQ(this,'c',39,'ad5')">B) <span class="key">⌘</span>+<span class="key">⇧</span>+<span class="key">3</span></button>
+<button class="qo" onclick="exQ(this,'w',39,'ad5')">C) <span class="key">⌘</span>+<span class="key">⇧</span>+<span class="key">5</span></button>
+<button class="qo" onclick="exQ(this,'w',39,'ad5')">D) <span class="key">⌘</span>+<span class="key">P</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+⇧+3 = captura completa</div></div>
+<div class="blk"><h2 class="bt">Pregunta 40 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo haces una captura de UN TROZO de la pantalla?</strong></p>
+<button class="qo" onclick="exQ(this,'w',40,'ad5')">A) <span class="key">⌘</span>+<span class="key">⇧</span>+<span class="key">3</span></button>
+<button class="qo" onclick="exQ(this,'c',40,'ad5')">B) <span class="key">⌘</span>+<span class="key">⇧</span>+<span class="key">4</span></button>
+<button class="qo" onclick="exQ(this,'w',40,'ad5')">C) <span class="key">⌘</span>+<span class="key">⇧</span>+<span class="key">5</span></button>
+<button class="qo" onclick="exQ(this,'w',40,'ad5')">D) <span class="key">⌘</span>+<span class="key">C</span></button>
+<div class="fb ok">✅ ¡Correcto! ⌘+⇧+4 = captura de zona</div></div>
+
+<div style="background:linear-gradient(135deg,#D1FAE5,#A7F3D0);border-radius:var(--r);padding:24px 32px;margin:32px 0 20px;text-align:center;border:2px solid var(--pri-d)"><div style="font-size:36px;margin-bottom:8px">🔐</div><div style="font-family:'Quicksand',sans-serif;font-weight:900;font-size:22px;color:var(--pri-d);text-transform:uppercase;letter-spacing:1.5px">BLOQUE 5: iPHONE + MAC Y SEGURIDAD</div><div style="font-size:16px;color:var(--txt-l);font-weight:600;margin-top:4px">10 preguntas</div></div>
+<div class="blk"><h2 class="bt">Pregunta 41 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo envías una foto del iPhone al Mac sin cables?</strong></p>
+<button class="qo" onclick="exQ(this,'w',41,'ad1')">A) Por WhatsApp</button>
+<button class="qo" onclick="exQ(this,'c',41,'ad1')">B) Con AirDrop</button>
+<button class="qo" onclick="exQ(this,'w',41,'ad1')">C) Con un USB</button>
+<div class="fb ok">✅ ¡Correcto! AirDrop envía archivos sin cables</div></div>
+<div class="blk"><h2 class="bt">Pregunta 42 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>Recibes un email que dice "Tu cuenta será eliminada, haz clic aquí". ¿Qué haces?</strong></p>
+<button class="qo" onclick="exQ(this,'w',42,'ad4')">A) Hacer clic para verificar</button>
+<button class="qo" onclick="exQ(this,'c',42,'ad4')">B) No hacer clic — probablemente es una estafa</button>
+<button class="qo" onclick="exQ(this,'w',42,'ad4')">C) Reenviar a todos mis contactos</button>
+<div class="fb ok">✅ ¡Correcto! Nunca hagas clic en enlaces sospechosos</div></div>
+<div class="blk"><h2 class="bt">Pregunta 43 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué es el Portapapeles Universal?</strong></p>
+<button class="qo" onclick="exQ(this,'w',43,'ad1')">A) Una app para recortar fotos</button>
+<button class="qo" onclick="exQ(this,'c',43,'ad1')">B) Copiar en iPhone y pegar en Mac (o viceversa)</button>
+<button class="qo" onclick="exQ(this,'w',43,'ad1')">C) Un cable especial</button>
+<button class="qo" onclick="exQ(this,'w',43,'ad1')">D) Un teclado externo</button>
+<div class="fb ok">✅ ¡Correcto! Copias en un dispositivo, pegas en otro</div></div>
+<div class="blk"><h2 class="bt">Pregunta 44 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué es Handoff?</strong></p>
+<button class="qo" onclick="exQ(this,'w',44,'ad1')">A) Enviar archivos por cable</button>
+<button class="qo" onclick="exQ(this,'c',44,'ad1')">B) Empezar algo en un dispositivo y continuar en otro</button>
+<button class="qo" onclick="exQ(this,'w',44,'ad1')">C) Hacer llamadas de teléfono</button>
+<button class="qo" onclick="exQ(this,'w',44,'ad1')">D) Una app de mensajería</button>
+<div class="fb ok">✅ ¡Correcto! Handoff = continuar en otro dispositivo</div></div>
+<div class="blk"><h2 class="bt">Pregunta 45 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>Si pierdes tu iPhone, ¿cómo lo encuentras desde el Mac?</strong></p>
+<button class="qo" onclick="exQ(this,'w',45,'ad2')">A) Spotlight</button>
+<button class="qo" onclick="exQ(this,'c',45,'ad2')">B) App Buscar (Find My)</button>
+<button class="qo" onclick="exQ(this,'w',45,'ad2')">C) Safari</button>
+<button class="qo" onclick="exQ(this,'w',45,'ad2')">D) Siri</button>
+<div class="fb ok">✅ ¡Correcto! App Buscar = localizar dispositivos</div></div>
+<div class="blk"><h2 class="bt">Pregunta 46 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué es iCloud Drive?</strong></p>
+<button class="qo" onclick="exQ(this,'w',46,'ad3')">A) Un disco duro externo</button>
+<button class="qo" onclick="exQ(this,'c',46,'ad3')">B) Carpeta sincronizada entre iPhone y Mac en la nube</button>
+<button class="qo" onclick="exQ(this,'w',46,'ad3')">C) Una app de fotos</button>
+<button class="qo" onclick="exQ(this,'w',46,'ad3')">D) Un cable para conectar dispositivos</button>
+<div class="fb ok">✅ ¡Correcto! iCloud Drive = carpeta en la nube</div></div>
+<div class="blk"><h2 class="bt">Pregunta 47 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo activas Siri en el Mac?</strong></p>
+<button class="qo" onclick="exQ(this,'w',47,'ad3')">A) <span class="key">F1</span></button>
+<button class="qo" onclick="exQ(this,'c',47,'ad3')">B) Decir "Oye Siri" o mantener el botón de Siri</button>
+<button class="qo" onclick="exQ(this,'w',47,'ad3')">C) <span class="key">Ctrl</span>+<span class="key">S</span></button>
+<button class="qo" onclick="exQ(this,'w',47,'ad3')">D) Clic en Finder</button>
+<div class="fb ok">✅ ¡Correcto! Di "Oye Siri" y pregunta lo que quieras</div></div>
+<div class="blk"><h2 class="bt">Pregunta 48 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Qué haces si una app se queda colgada?</strong></p>
+<button class="qo" onclick="exQ(this,'w',48,'ad6')">A) Desenchufar el Mac</button>
+<button class="qo" onclick="exQ(this,'c',48,'ad6')">B) <span class="key">⌘</span>+<span class="key">⌥</span>+<span class="key">Esc</span> y Forzar salida</button>
+<button class="qo" onclick="exQ(this,'w',48,'ad6')">C) Esperar 1 hora</button>
+<button class="qo" onclick="exQ(this,'w',48,'ad6')">D) Cerrar la tapa</button>
+<div class="fb ok">✅ ¡Correcto! ⌘+⌥+Esc = Forzar salida</div></div>
+<div class="blk"><h2 class="bt">Pregunta 49 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Cómo bloqueas la pantalla del Mac?</strong></p>
+<button class="qo" onclick="exQ(this,'w',49,'ad4')">A) <span class="key">⌘</span>+<span class="key">L</span></button>
+<button class="qo" onclick="exQ(this,'c',49,'ad4')">B) <span class="key">⌃</span>+<span class="key">⌘</span>+<span class="key">Q</span></button>
+<button class="qo" onclick="exQ(this,'w',49,'ad4')">C) <span class="key">⌘</span>+<span class="key">Q</span></button>
+<button class="qo" onclick="exQ(this,'w',49,'ad4')">D) Cerrar la tapa</button>
+<div class="fb ok">✅ ¡Correcto! ⌃+⌘+Q = bloquear pantalla</div></div>
+<div class="blk"><h2 class="bt">Pregunta 50 de 50</h2>
+<p class="bx" style="font-size:22px;margin-bottom:16px"><strong>¿Las contraseñas guardadas en el Mac funcionan en el iPhone?</strong></p>
+<button class="qo" onclick="exQ(this,'w',50,'ad4')">A) No, son independientes</button>
+<button class="qo" onclick="exQ(this,'c',50,'ad4')">B) Sí, con Llavero de iCloud</button>
+<button class="qo" onclick="exQ(this,'w',50,'ad4')">C) Solo las de Safari</button>
+<button class="qo" onclick="exQ(this,'w',50,'ad4')">D) Hay que copiarlas manualmente</button>
+<div class="fb ok">✅ ¡Correcto! Llavero de iCloud sincroniza contraseñas</div></div>
+
+<div id="exRes" class="ex-res"></div>`},
+
+// ==================== FINAL ====================
+{id:'end',title:'\u{00A1}Enhorabuena!',icon:'\u{1F389}',sec:'Examen Final',lv:'b',
+c:()=>`<div class="lh-b b">\u{1F3C6} Completado</div>
+<h1 class="lh-t">\u{00A1}Enhorabuena!</h1>
+<p class="lh-d">Has completado todas las lecciones. \u{00A1}Eres un experto!</p>
+
+<div class="blk" style="background:linear-gradient(135deg,var(--pri-l),#C3F7D5);border:3px solid var(--pri)">
+<h2 class="bt"><span class="ic">\u{1F4DA}</span> Lo que has aprendido</h2>
+<p class="bx" style="font-size:22px">
+\u{2705} Escribir con el teclado: letras, n\u{00FA}meros, @, acentos y atajos<br>
+\u{2705} Usar el trackpad: cursor, clic, scroll, zoom y gestos avanzados<br>
+\u{2705} Texto predictivo y dictado por voz<br>
+\u{2705} Navegar por Internet con Safari<br>
+\u{2705} Gestionar archivos con el Finder<br>
+\u{2705} Usar correo, Outlook con Gmail, fotos, mensajes y videollamadas<br>
+\u{2705} App Store: instalar y desinstalar apps<br>
+\u{2705} WhatsApp y YouTube en el Mac<br>
+\u{2705} Spotlight: buscar cualquier cosa<br>
+\u{2705} iPhone + Mac: AirDrop, Portapapeles Universal, Handoff<br>
+\u{2705} iCloud: todo sincronizado en la nube<br>
+\u{2705} Siri, seguridad, notas y calendario<br>
+\u{2705} Capturas de pantalla y trucos avanzados
+</p><br>
+<p class="bx" style="font-size:24px"><strong>Lo m\u{00E1}s importante:</strong> practica un poquito cada d\u{00ED}a. No tengas miedo de tocar cosas \u{2014} el Mac es muy dif\u{00ED}cil de "romper". Y si te equivocas: <span class="key">\u{2318}</span>+<span class="key">Z</span>.</p>
+<br><div style="text-align:center">
+<button class="btn btn-p btn-lg" onclick="go(0)">\u{21A9}\u{FE0F} Volver al inicio</button>
+</div></div>`}
+];
+
+// ==========================================
+// APP STATE
+// ==========================================
+let cur=0, done=new Set(), cSc=0, sbQ='', exSc=0, exAns=new Set(), exWr=[];
+
+// ==========================================
+// RENDER
+// ==========================================
+function renderSB(){
+  const sb=document.getElementById('sidebar');
+  let h='<input type="text" class="sb-search" id="sbSearch" placeholder="\u{1F50D} Buscar lecci\u{00F3}n..." value="'+sbQ.replace(/"/g,'&quot;')+'">';
+  h+=`<div class="sb-count">${done.size} de ${L.length} completadas</div>`;
+  let cs='';
+  L.forEach((l,i)=>{
+    if(sbQ && !l.title.toLowerCase().includes(sbQ) && !l.sec.toLowerCase().includes(sbQ)) return;
+    if(l.sec!==cs){cs=l.sec;h+=`<div class="sb-sec">${cs}</div>`}
+    const a=i===cur?'on':'';
+    const d=done.has(i)&&i!==cur?'dn':'';
+    h+=`<div class="sb-i ${a} ${d}" onclick="go(${i})"><span class="sb-ic">${l.icon}</span>${l.title}</div>`;
+  });
+  sb.innerHTML=h;
+  const ns=document.getElementById('sbSearch');
+  if(ns){ns.addEventListener('input',function(){sbQ=this.value.trim().toLowerCase();renderSB()});if(sbQ){ns.focus();ns.setSelectionRange(ns.value.length,ns.value.length)}}
+}
+
+function render(){
+  const m=document.getElementById('main');
+  const l=L[cur];
+  let nav='';
+  if(cur>0||cur<L.length-1){
+    nav=`<div class="lnav">${cur>0?`<button class="btn btn-o" onclick="prev()">\u{2190} ${L[cur-1].title}</button>`:'<div></div>'}${cur<L.length-1?`<button class="btn btn-p" onclick="next()">Siguiente: ${L[cur+1].title} \u{2192}</button>`:'<div></div>'}</div>`;
+  }
+  m.innerHTML=l.c()+nav;
+  window.scrollTo(0,0);
+  m.scrollTop=0;
+
+  // Progress
+  const p=Math.round(done.size/L.length*100);
+  document.getElementById('pBar').style.width=p+'%';
+  document.getElementById('pLbl').textContent=p+'%';
+
+  // Level badge
+  const lb=document.getElementById('lvlB');
+  if(l.lv==='b'){lb.className='lvl-b b';lb.textContent='Principiante'}
+  else if(l.lv==='i'){lb.className='lvl-b i';lb.textContent='Intermedio'}
+  else{lb.className='lvl-b a';lb.textContent='Avanzado'}
+
+  renderSB();
+  initEx();
+}
+
+function go(i){if(cur<L.length)done.add(cur);cur=i;if(L[i].id==='exam'){exSc=0;exAns=new Set();exWr=[];}window.location.hash=L[i].id;render()}
+function next(){if(cur<L.length-1)go(cur+1)}
+function prev(){if(cur>0)go(cur-1)}
+
+// ==========================================
+// EXERCISES
+// ==========================================
+function initEx(){
+  // Name
+  const en=document.getElementById('exN');
+  if(en)en.addEventListener('input',()=>{if(en.value.trim().length>=2){en.classList.add('ok');show('fbN')}});
+
+  // Phrase
+  const ep=document.getElementById('exP');
+  if(ep)ep.addEventListener('input',()=>{
+    if(ep.value.trim()==='Hola, me llamo Pedro.'){ep.classList.add('ok');show('fbP');hide('fbPH')}
+    else if(ep.value.length>10)showEl('fbPH')
+  });
+
+  // Email
+  const ee=document.getElementById('exE');
+  if(ee)ee.addEventListener('input',()=>{if(ee.value.includes('@')){ee.classList.add('ok');show('fbE')}});
+
+  // Accent
+  const ea=document.getElementById('exA');
+  if(ea)ea.addEventListener('input',()=>{
+    const v=ea.value.trim().toLowerCase();
+    if(v==='espa\u{00F1}a es fant\u{00E1}stica'){ea.classList.add('ok');show('fbA')}
+  });
+
+  // Copy paste
+  const cd=document.getElementById('exCD');
+  if(cd)cd.addEventListener('input',()=>{if(cd.value.trim()==='\u{00A1}Hola mundo!'){cd.classList.add('ok');show('fbC')}});
+
+  // Trackpad
+  const tp=document.getElementById('tpD');
+  if(tp){
+    const c=document.getElementById('tpC');
+    const mv=(e)=>{const r=tp.getBoundingClientRect();let x,y;if(e.touches){x=e.touches[0].clientX-r.left;y=e.touches[0].clientY-r.top}else{x=e.clientX-r.left;y=e.clientY-r.top}x=Math.max(9,Math.min(r.width-9,x));y=Math.max(9,Math.min(r.height-9,y));c.style.left=x+'px';c.style.top=y+'px';c.style.transform='none'};
+    tp.addEventListener('mousemove',mv);tp.addEventListener('touchmove',(e)=>{e.preventDefault();mv(e)});
+  }
+
+  // Click game
+  const cg=document.getElementById('cG');
+  if(cg){cSc=0;document.getElementById('cS').textContent='0';spawn()}
+
+  // Scroll
+  const sc=document.getElementById('scEx');
+  if(sc){
+    const t=document.getElementById('scT');
+    const ob=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){show('fbSc');ob.disconnect()}})},{root:sc,threshold:0.5});
+    ob.observe(t);
+  }
+}
+
+function spawn(){
+  const g=document.getElementById('cG');
+  if(!g||cSc>=5)return;
+  g.innerHTML='';
+  const t=document.createElement('div');
+  t.className='ct';t.innerHTML='\u{1F3AF}';
+  t.style.left=(Math.random()*(g.offsetWidth-64))+'px';
+  t.style.top=(Math.random()*(g.offsetHeight-64))+'px';
+  t.addEventListener('click',(e)=>{e.stopPropagation();cSc++;document.getElementById('cS').textContent=cSc;
+    if(cSc>=5){g.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:26px;font-weight:700;color:var(--ok)">\u{1F389} \u{00A1}Completado!</div>';show('fbCl')}
+    else spawn()
+  });
+  g.appendChild(t);
+}
+
+function show(id){const e=document.getElementById(id);if(e){e.classList.add('sh')}}
+function hide(id){const e=document.getElementById(id);if(e){e.style.display='none'}}
+function showEl(id){const e=document.getElementById(id);if(e){e.style.display='flex'}}
+
+function qz(btn,r){
+  const p=btn.parentElement;
+  const opts=p.querySelectorAll('.qo');
+  opts.forEach(o=>{o.classList.add('d');if(o===btn)o.classList.add(r==='c'?'c':'w')});
+  if(r==='c'){const fb=p.querySelector('.fb');if(fb)fb.classList.add('sh')}
+}
+
+// Exam functions
+function exQ(btn,r,qn,lid){
+  const p=btn.parentElement;
+  const opts=p.querySelectorAll('.qo');
+  opts.forEach(o=>{o.classList.add('d');if(o===btn)o.classList.add(r==='c'?'c':'w')});
+  if(r==='c'){const fb=p.querySelector('.fb');if(fb)fb.classList.add('sh')}
+  if(!exAns.has(qn)){exAns.add(qn);if(r==='c')exSc++;else exWr.push({q:qn,lid:lid})}
+  if(exAns.size>=50)setTimeout(exShow,600);
+}
+function exEmailSend(){
+  const el=document.getElementById('exEmail');if(!el)return;
+  if(el.value.trim().length>=10){
+    el.classList.add('ok');show('fbExEmail');
+    if(!exAns.has(8)){exAns.add(8);exSc++}
+    if(exAns.size>=50)setTimeout(exShow,600);
+  }
+}
+function exSkip(qn,lid){
+  if(!exAns.has(qn)){exAns.add(qn);exWr.push({q:qn,lid:lid})}
+  if(exAns.size>=50)setTimeout(exShow,600);
+}
+function exShow(){
+  const el=document.getElementById('exRes');if(!el)return;
+  let msg='',ic='';
+  if(exSc===50){ic='\u{1F3C6}';msg='\u{00A1}MATR\u{00CD}CULA DE HONOR! \u{00A1}Eres un aut\u{00E9}ntico experto en Mac!';}
+  else if(exSc>=40){ic='\u{1F389}';msg='\u{00A1}SOBRESALIENTE! Dominas tu Mac casi a la perfecci\u{00F3}n.';}
+  else if(exSc>=30){ic='\u{1F44F}';msg='\u{00A1}NOTABLE! Sabes much\u{00ED}simo. Repasa las que fallaste.';}
+  else if(exSc>=20){ic='\u{1F44D}';msg='\u{00A1}APROBADO! Ya sabes lo esencial. Revisa las lecciones de lo que fallaste.';}
+  else{ic='\u{1F4AA}';msg='\u{00A1}\u{00C1}NIMO! Repasa las lecciones y vuelve a intentarlo. \u{00A1}T\u{00FA} puedes!';}
+  let h=`<div style="font-size:64px;margin-bottom:16px">${ic}</div>`;
+  h+=`<div style="font-family:'Quicksand',sans-serif;font-weight:900;font-size:32px;color:var(--pri-d);margin-bottom:8px">${exSc} de 50</div>`;
+  h+=`<p style="font-size:22px;color:var(--txt);margin-bottom:24px">${msg}</p>`;
+  if(exWr.length>0){
+    h+=`<div style="text-align:left;max-width:400px;margin:0 auto 24px"><p style="font-weight:800;font-size:18px;color:var(--acc);margin-bottom:12px">\u{1F4D6} Repasa estas lecciones:</p>`;
+    const nm={kb1:'El teclado del Mac',kb2:'Escribir una frase',kb3:'Atajos de teclado',tp1:'Tu primer clic',tp2:'Clic derecho y gestos',sw1:'El Escritorio y el Dock',sw2:'Safari (Internet)',sw3:'Texto predictivo y dictado',sw4:'Ajustes importantes',in1:'Finder: archivos',in2:'Spotlight: buscar todo',in3:'Correo (Mail)',in4:'Fotos en el Mac',ol1:'Outlook para Gmail',yt1:'YouTube en el Mac',wa1:'WhatsApp en el Mac',ad1:'iPhone + Mac',ad2:'Buscar mi iPhone',ad3:'iCloud y Siri',ad4:'Seguridad y contrase\u{00F1}as',ad5:'Capturas de pantalla',ad6:'Trucos avanzados'};
+    const seen=new Set();
+    exWr.forEach(w=>{if(seen.has(w.lid))return;seen.add(w.lid);const idx=L.findIndex(l=>l.id===w.lid);if(idx>=0)h+=`<div style="padding:10px 16px;background:var(--acc-l);border-radius:8px;margin:6px 0;cursor:pointer;font-size:18px;font-weight:600" onclick="go(${idx})">\u{2192} ${nm[w.lid]||L[idx].title}</div>`});
+    h+=`</div>`;
+  }
+  h+=`<button class="btn btn-p btn-lg" onclick="exReset()" style="margin-top:16px">\u{1F504} Repetir examen</button>`;
+  el.style.display='block';el.innerHTML=h;
+  el.scrollIntoView({behavior:'smooth'});
+}
+function exReset(){exSc=0;exAns=new Set();exWr=[];const idx=L.findIndex(l=>l.id==='exam');if(idx>=0){cur=idx;render()}}
+
+// Keyboard highlight
+document.addEventListener('keydown',(e)=>{
+  const kb=document.getElementById('kbM');
+  if(!kb)return;
+  kb.querySelectorAll('.kb-k').forEach(k=>{
+    if(k.textContent===e.key.toUpperCase()){k.classList.add('on');setTimeout(()=>k.classList.remove('on'),300)}
+  });
+});
+
+// Init: restore from hash
+const initHash=window.location.hash.slice(1);
+if(initHash){const idx=L.findIndex(l=>l.id===initHash);if(idx>=0)cur=idx;}
+render();
+</script>
+</body>
+</html>
