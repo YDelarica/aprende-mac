@@ -111,6 +111,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);font-
 .sb-count{text-align:center;font-size:13px;color:var(--txt-m);font-weight:700;padding:4px 0 10px;border-bottom:1px solid var(--brd);margin-bottom:8px}
 .sb-ic svg{width:20px!important;height:20px!important;margin-right:0!important}
 .ex-res{display:none;background:linear-gradient(135deg,var(--pri-l),#C3F7D5);border:3px solid var(--pri);border-radius:var(--r);padding:32px;margin:24px 0;text-align:center}
+.trk{background:#FEF9C3;border-left:5px solid #F59E0B;border-radius:0 var(--rx) var(--rx) 0;padding:16px 20px;margin:16px 0 0;font-size:19px;line-height:1.6;animation:fi .3s ease}
 </style>
 </head>
 <body>
@@ -1461,12 +1462,74 @@ function qz(btn,r){
   if(r==='c'){const fb=p.querySelector('.fb');if(fb)fb.classList.add('sh')}
 }
 
+// Exam tricks (1 per question)
+const exTricks={
+1:"C de Copiar. \u2318+C copia, \u2318+V pega, \u2318+X corta.",
+2:"Z es la \u00FAltima letra \u2014 \u00A1deshace lo \u00FAltimo! \u2318+Z.",
+3:"Shift est\u00E1 en los dos lados del teclado. Mant\u00E9n pulsado mientras escribes.",
+4:"Option es la tecla m\u00E1gica para s\u00EDmbolos especiales. \u2325+2 = @.",
+5:"A de All (Todo en ingl\u00E9s). \u2318+A selecciona todo el texto.",
+6:"S de Save (Guardar). \u2318+S guarda. \u00A1\u00DAsalo a menudo!",
+7:"P de Print (Imprimir). \u2318+P abre la ventana de impresi\u00F3n.",
+8:"Practica escribir cada d\u00EDa. El teclado se domina con la pr\u00E1ctica.",
+9:"\u2325+2 = @, \u2325+3 = \u20AC. Los s\u00EDmbolos especiales est\u00E1n en los n\u00FAmeros con Option.",
+10:"F de Find (Buscar). \u2318+F busca palabras en cualquier p\u00E1gina o documento.",
+11:"2 dedos sobre el trackpad = clic derecho. Aparece un men\u00FA con opciones extra.",
+12:"Como ampliar una foto con los dedos. Separar = m\u00E1s grande, juntar = m\u00E1s peque\u00F1o.",
+13:"Pellizca el trackpad con 4 dedos, como si cerraras la mano. Ver\u00E1s todas las apps.",
+14:"3 dedos hacia arriba = ves todas las ventanas abiertas de golpe.",
+15:"2 dedos a la derecha = atr\u00E1s. Como pasar p\u00E1gina de un libro.",
+16:"Dos toques r\u00E1pidos seguidos. Abre archivos y selecciona palabras.",
+17:"Desliza suavemente 1 dedo por el trackpad. El cursor te sigue.",
+18:"3 dedos izquierda/derecha = cambiar de escritorio. Como pasar diapositivas.",
+19:"Separar 2 dedos = zoom in (m\u00E1s grande). Juntar 2 dedos = zoom out (m\u00E1s peque\u00F1o).",
+20:"2 dedos arriba/abajo para moverte por la p\u00E1gina. Suave y natural.",
+21:"El puntito bajo el icono es como un piloto encendido: la app est\u00E1 funcionando.",
+22:"T de Tab (pesta\u00F1a). \u2318+T abre una pesta\u00F1a nueva en Safari.",
+23:"Siempre apaga desde el men\u00FA \uD83C\uDF4E (esquina superior izquierda). Nunca desenchufes.",
+24:"Sem\u00E1foro: \uD83D\uDD34 Rojo = cerrar, \uD83D\uDFE1 Amarillo = minimizar, \uD83D\uDFE2 Verde = pantalla completa.",
+25:"\uD83D\uDFE2 Verde = la ventana se hace grande y ocupa toda la pantalla.",
+26:"\u2318 y + = m\u00E1s grande. \u2318 y \u2212 = m\u00E1s peque\u00F1o. Perfecto para leer mejor.",
+27:"Ajustes \u2192 Accesibilidad \u2192 Pantalla. Ah\u00ED puedes hacer el cursor m\u00E1s grande.",
+28:"\u2318+Espacio abre Spotlight. Busca apps, archivos, contactos... \u00A1todo!",
+29:"Finder es la carita azul sonriente del Dock. Tus archivos viven ah\u00ED.",
+30:"Pulsa Fn dos veces r\u00E1pido. Habla y el Mac escribe por ti. \u00A1Magia!",
+31:"Abre WhatsApp en el Mac \u2192 escanea el c\u00F3digo QR con el m\u00F3vil. \u00A1Conectado!",
+32:"N de Nuevo. \u2318+N crea un correo nuevo en Outlook.",
+33:"El clip \uD83D\uDCCE es universal. En cualquier correo, el clip = adjuntar archivo.",
+34:"Todo lo que descargas va a la carpeta Descargas. B\u00FAscala en Finder.",
+35:"\u2318+Suprimir env\u00EDa a la Papelera. No se borra definitivamente hasta vaciarla.",
+36:"\u2318+Shift+N = Nueva carpeta. Organiza tus archivos en carpetas.",
+37:"El buscador de Fotos es inteligente. Busca por lugar, persona o cosa.",
+38:"La barra de Espacio pausa y reanuda el v\u00EDdeo. Como un mando a distancia.",
+39:"\u2318+\u21E7+3 = foto de TODA la pantalla. Se guarda en el Escritorio.",
+40:"\u2318+\u21E7+4 = seleccionas un trozo. Dibuja un rect\u00E1ngulo con el cursor.",
+41:"AirDrop env\u00EDa archivos entre iPhone y Mac por el aire. Ambos necesitan WiFi y Bluetooth.",
+42:"Si un email te mete prisa o miedo, desconf\u00EDa. Los bancos nunca piden datos por email.",
+43:"Copia en el iPhone, pega en el Mac. Mismo Apple ID = Portapapeles Universal.",
+44:"Empieza un email en el iPhone, term\u00EDnalo en el Mac. Handoff pasa el trabajo.",
+45:"App Buscar (Find My). Localiza tu iPhone en un mapa. Tambi\u00E9n puede hacerlo sonar.",
+46:"iCloud Drive es tu carpeta en la nube. Lo que guardas ah\u00ED aparece en todos tus dispositivos.",
+47:"Di \u2018Oye Siri\u2019 y pregunta lo que quieras: el tiempo, una alarma, abrir una app...",
+48:"\u2318+\u2325+Esc abre Forzar Salida. Selecciona la app colgada y ci\u00E9rrala.",
+49:"\u2303+\u2318+Q bloquea la pantalla al instante. Nadie podr\u00E1 ver tu Mac.",
+50:"El Llavero de iCloud guarda y sincroniza tus contrase\u00F1as entre todos tus dispositivos Apple."
+};
+
 // Exam functions
 function exQ(btn,r,qn,lid){
   const p=btn.parentElement;
   const opts=p.querySelectorAll('.qo');
-  opts.forEach(o=>{o.classList.add('d');if(o===btn)o.classList.add(r==='c'?'c':'w')});
+  opts.forEach(o=>{
+    o.classList.add('d');
+    if(o===btn)o.classList.add(r==='c'?'c':'w');
+    if(r==='w'&&o!==btn&&o.getAttribute('onclick')&&o.getAttribute('onclick').indexOf(",'c',")>-1)o.classList.add('c');
+  });
   if(r==='c'){const fb=p.querySelector('.fb');if(fb)fb.classList.add('sh')}
+  if(exTricks[qn]&&!p.querySelector('.trk')){
+    const t=document.createElement('div');t.className='trk';
+    t.innerHTML='\uD83D\uDCA1 <strong>Truco:</strong> '+exTricks[qn];p.appendChild(t);
+  }
   if(!exAns.has(qn)){exAns.add(qn);if(r==='c')exSc++;else exWr.push({q:qn,lid:lid})}
   if(exAns.size>=50)setTimeout(exShow,600);
 }
@@ -1475,11 +1538,23 @@ function exEmailSend(){
   if(el.value.trim().length>=10){
     el.classList.add('ok');show('fbExEmail');
     if(!exAns.has(8)){exAns.add(8);exSc++}
+    const p=el.closest('.ex');
+    if(p&&exTricks[8]&&!p.querySelector('.trk')){
+      const t=document.createElement('div');t.className='trk';
+      t.innerHTML='\uD83D\uDCA1 <strong>Truco:</strong> '+exTricks[8];p.appendChild(t);
+    }
     if(exAns.size>=50)setTimeout(exShow,600);
   }
 }
 function exSkip(qn,lid){
   if(!exAns.has(qn)){exAns.add(qn);exWr.push({q:qn,lid:lid})}
+  const el=document.getElementById('exEmail');
+  if(el){const p=el.closest('.ex');
+    if(p&&exTricks[qn]&&!p.querySelector('.trk')){
+      const t=document.createElement('div');t.className='trk';
+      t.innerHTML='\uD83D\uDCA1 <strong>Truco:</strong> '+exTricks[qn];p.appendChild(t);
+    }
+  }
   if(exAns.size>=50)setTimeout(exShow,600);
 }
 function exShow(){
